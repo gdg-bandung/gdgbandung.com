@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@vercel/remix";
-import { redirect } from "@remix-run/node";
+// import { redirect } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,9 +8,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = () => {
-  return redirect("https://gdg.community.dev/gdg-bandung/");
-};
+// redirect("https://gdg.community.dev/gdg-bandung/");
 
 export default function Index() {
   return (
