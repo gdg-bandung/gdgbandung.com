@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,10 +8,6 @@ export const meta: MetaFunction = () => {
       content: "Welcome to GDG Bandung community website.",
     },
   ];
-};
-
-export const loader = async () => {
-  return redirect("https://gdg.community.dev/gdg-bandung");
 };
 
 export default function Index() {

@@ -1,10 +1,12 @@
 # gdgbandung.com
 
-This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+GDG Bandung Community Website.
 
-- / -> https://gdg.community.dev/gdg-bandung
-- /sponsor -> https://forms.gle/fihWMesmfcR1M96f9
-- /cfs -> https://sessionize.com/devfest-bandung-2023
+- `/`: https://gdg.community.dev/gdg-bandung
+- `/sponsor`: https://forms.gle/fihWMesmfcR1M96f9
+- `/cfs`: https://sessionize.com/devfest-bandung-2023
+
+Currently if need to change, configure in `app/configs/redirects.ts`.
 
 ## Deploy Your Own
 
