@@ -1,4 +1,3 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
 import type { MetaFunction } from "@vercel/remix";
 
 export const meta: MetaFunction = () => {
@@ -8,7 +7,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = () => {
   return redirect("https://gdg.community.dev/gdg-bandung/");
 };
 
