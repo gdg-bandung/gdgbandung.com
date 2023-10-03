@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@vercel/remix";
+import { redirect } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
