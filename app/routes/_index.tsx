@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@vercel/remix";
-// import { redirect } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,7 +7,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-// redirect("https://gdg.community.dev/gdg-bandung/");
+export const loader = async () => {
+  return new Response(null, {
+    status: 303,
+    headers: {
+      Location: "https://gdg.community.dev/gdg-bandung/"
+    },
+  });
+};
 
 export default function Index() {
   return (
