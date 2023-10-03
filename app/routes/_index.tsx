@@ -1,19 +1,18 @@
-import type { MetaFunction } from "@vercel/remix";
+import type { MetaFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "GDG Bandung" },
-    { name: "description", content: "Welcome to GDG Bandung" },
+    {
+      name: "description",
+      content: "Welcome to GDG Bandung community website.",
+    },
   ];
 };
 
 export const loader = async () => {
-  return new Response(null, {
-    status: 303,
-    headers: {
-      Location: "https://gdg.community.dev/gdg-bandung/"
-    },
-  });
+  return redirect("https://gdg.community.dev/gdg-bandung");
 };
 
 export default function Index() {
@@ -22,7 +21,4 @@ export default function Index() {
       <h1>Welcome to GDG Bandung</h1>
     </div>
   );
-}
-function redirect(arg0: string) {
-  throw new Error("Function not implemented.");
 }

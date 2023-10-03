@@ -1,6 +1,10 @@
-# Remix
+# gdgbandung.com
 
 This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+
+- / -> https://gdg.community.dev/gdg-bandung
+- /sponsor -> https://forms.gle/fihWMesmfcR1M96f9
+- /cfs -> https://sessionize.com/devfest-bandung-2023
 
 ## Deploy Your Own
 
