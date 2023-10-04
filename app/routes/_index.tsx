@@ -1,4 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { redirectRouteToURL } from "~/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,6 +9,10 @@ export const meta: MetaFunction = () => {
       content: "Welcome to GDG Bandung community website.",
     },
   ];
+};
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  return redirectRouteToURL(request);
 };
 
 export default function Index() {
