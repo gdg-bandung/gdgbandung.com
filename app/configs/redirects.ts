@@ -6,4 +6,8 @@ export const configRedirects = [
     path: "/devfest",
     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2023/",
   },
+  {
+    path: "/devfest2023",
+    url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2023/",
+  },
 ];
