@@ -10,4 +10,8 @@ export const configRedirects = [
     path: "/devfest2023",
     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2023/",
   },
+  {
+    path: "/speakerconfirm",
+    url: "https://forms.gle/QGusEJCpKio7mAe28",
+  },
 ];
