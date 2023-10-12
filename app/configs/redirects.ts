@@ -14,4 +14,8 @@ export const configRedirects = [
     path: "/speakerconfirm",
     url: "https://forms.gle/QGusEJCpKio7mAe28",
   },
+  {
+    path: "/juaraandroid",
+    url: "https://gdg.community.dev/e/m5bgsn/",
+  },
 ];
