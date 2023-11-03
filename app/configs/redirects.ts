@@ -18,4 +18,8 @@ export const configRedirects = [
     path: "/juaraandroid",
     url: "https://gdg.community.dev/e/m5bgsn/",
   },
+  {
+    path: "/tenant",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSfp3GPWS8v3ILSM1uo66cAHPm9lqucUL_Y4oNU7dyzlTm4yhQ/viewform",
+  },
 ];
