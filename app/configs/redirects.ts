@@ -25,5 +25,9 @@ export const configRedirects = [
   {
     path: "/roadtodevfest",
     url: "https://gdg.community.dev/e/mjth62/",
-  },
+    },
+    {
+        path: "/RoadToDevFest",
+        url: "https://gdg.community.dev/e/mjth62/",
+    },
 ];
