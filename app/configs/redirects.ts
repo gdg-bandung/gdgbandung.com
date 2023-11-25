@@ -26,16 +26,16 @@ export const configRedirects = [
     path: "/maranatha",
     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2023/?code=maranatha",
   },
+  // {
+  //   path: "/roadtodevfest",
+  //   url: "https://gdg.community.dev/e/mjth62/",
+  //   },
+  // {
+  //       path: "/RoadToDevFest",
+  //       url: "https://gdg.community.dev/e/mjth62/",
+  // },
   {
-    path: "/roadtodevfest",
-    url: "https://gdg.community.dev/e/mjth62/",
-    },
-  {
-        path: "/RoadToDevFest",
-        url: "https://gdg.community.dev/e/mjth62/",
-  },
-  {
-    path: "/DevfestFaq",
+    path: "/devfestFaq",
     url: "https://docs.google.com/document/d/1Ptud_p7UIpkU4HHd8ubZbi5BC7fBZuWnW_EsVeECUJA/edit",
     },
 
