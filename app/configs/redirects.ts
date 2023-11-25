@@ -35,7 +35,7 @@ export const configRedirects = [
         url: "https://gdg.community.dev/e/mjth62/",
   },
   {
-    path: "/devfest-faq",
+    path: "/DevfestFaq",
     url: "https://docs.google.com/document/d/1Ptud_p7UIpkU4HHd8ubZbi5BC7fBZuWnW_EsVeECUJA/edit",
     },
 
