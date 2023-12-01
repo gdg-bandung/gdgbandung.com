@@ -38,5 +38,21 @@ export const configRedirects = [
     path: "/faq",
     url: "https://docs.google.com/document/d/1Ptud_p7UIpkU4HHd8ubZbi5BC7fBZuWnW_EsVeECUJA/edit",
     },
+    {
+      path: "/submission",
+      url: "https://forms.gle/9Q7J2DpRsRdbMaYq8",
+    },
+    {
+      path: "/feedback",
+      url: "https://forms.gle/SXkn8vKudfinVk9h6",
+    },
+    {
+      path: "/presensi",
+      url: "https://forms.gle/PMeub3jCVKvoaM5D9",
+    },
+    {
+      path: "/live",
+      url: "https://www.youtube.com/live/blwoS74cdVE?si=ax2XSuvFThn7vqz9",
+    },
 
 ];
