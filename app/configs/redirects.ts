@@ -54,5 +54,9 @@ export const configRedirects = [
       path: "/live",
       url: "https://www.youtube.com/live/blwoS74cdVE?si=ax2XSuvFThn7vqz9",
     },
+    {
+      path: "/feedback-sponsor",
+      url: "https://forms.gle/P98Umf3Xr2JNbfrZ9",
+    },
 
 ];
