@@ -62,5 +62,9 @@ export const configRedirects = [
       path: "/mentoring",
       url: "https://forms.gle/Y1erUf9X7axeGz5ZA",
     },
+    {
+      path: "/iwd",
+      url: "https://gdg.community.dev/events/details/google-gdg-cloud-bandung-presents-iwd-bandung-2024/",
+    },
 
 ];
