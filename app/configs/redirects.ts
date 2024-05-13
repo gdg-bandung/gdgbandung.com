@@ -70,6 +70,10 @@ export const configRedirects = [
       path: "/gplay",
       url: "https://docs.google.com/forms/d/e/1FAIpQLSfOoVQaRvk-K5rwddB12Ice-c2drJDiF_9VXLzXciU6I1B_QQ/viewform?entry.1259201235=GDGBDG24",
     },
+    {
+      path: "/hackathon",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSewBE-VOQLPiWTZ--Ug7Y8RU6O12m6QeX5B-PcqUBnbsjlQWg/viewform",
+    },
 
 
 ];
