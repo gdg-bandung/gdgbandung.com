@@ -66,5 +66,10 @@ export const configRedirects = [
       path: "/iwd",
       url: "https://gdg.community.dev/events/details/google-gdg-cloud-bandung-presents-iwd-bandung-2024/",
     },
+    {
+      path: "/gplay",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSfOoVQaRvk-K5rwddB12Ice-c2drJDiF_9VXLzXciU6I1B_QQ/viewform?entry.1259201235=GDGBDG24",
+    },
+
 
 ];
