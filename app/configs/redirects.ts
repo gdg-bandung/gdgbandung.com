@@ -74,6 +74,9 @@ export const configRedirects = [
       path: "/hackathon",
       url: "https://docs.google.com/forms/d/e/1FAIpQLSewBE-VOQLPiWTZ--Ug7Y8RU6O12m6QeX5B-PcqUBnbsjlQWg/viewform",
     },
-
+    {
+      path: "/bwai",
+      url: "https://gdg.community.dev/e/mzcsmm/",
+    },
 
 ];
