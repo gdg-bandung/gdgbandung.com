@@ -78,5 +78,16 @@ export const configRedirects = [
       path: "/bwai",
       url: "https://gdg.community.dev/e/mzcsmm/",
     },
-
+    {
+      path: "/devfest-24",
+      url: "https://gdg.community.dev/e/m2qxyg/",
+    },
+    {
+      path: "/iox-24",
+      url: "https://gdg.community.dev/e/mc24tz/",
+    },
+    {
+      path: "/cek-24",
+      url: "https://gdg.community.dev/e/mc24tz/",
+    },
 ];
