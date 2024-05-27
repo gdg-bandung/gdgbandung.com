@@ -90,4 +90,8 @@ export const configRedirects = [
       path: "/cek-24",
       url: "https://gdg.community.dev/e/mc24tz/",
     },
+    {
+      path: "/iox24-volunteer",
+      url: "https://forms.gle/PqCqa8tP4ciiMUUg8",
+    },
 ];
