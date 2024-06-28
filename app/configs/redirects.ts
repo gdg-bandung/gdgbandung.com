@@ -98,4 +98,8 @@ export const configRedirects = [
       path: "/we-are-fix-volunteer-iox24",
       url: "https://forms.gle/RjyLAhC8Gj3GccYm7",
     },
+    {
+      path: "/sponsorship",
+      url: "https://forms.gle/uQKgo9q8714GGTV86",
+    },
 ];
