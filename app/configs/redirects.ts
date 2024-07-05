@@ -102,4 +102,9 @@ export const configRedirects = [
       path: "/sponsorship",
       url: "https://forms.gle/uQKgo9q8714GGTV86",
     },
+    {
+      path: "/form-speakers",
+      url: "https://forms.gle/SEvepMutm6qm5ym36",
+    },
+];
 ];
