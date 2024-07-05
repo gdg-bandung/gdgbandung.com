@@ -106,5 +106,8 @@ export const configRedirects = [
       path: "/form-speakers",
       url: "https://forms.gle/SEvepMutm6qm5ym36",
     },
-];
+    {
+      path: "/test-form-speakers",
+      url: "https://forms.gle/SEvepMutm6qm5ym36",
+    },
 ];
