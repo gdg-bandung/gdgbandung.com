@@ -110,4 +110,8 @@ export const configRedirects = [
       path: "/test-form-speakers",
       url: "https://forms.gle/SEvepMutm6qm5ym36",
     },
+    {
+      path: "/form-duit",
+      url: "https://forms.gle/hELiovUuwouGsd8w6",
+    },
 ];
