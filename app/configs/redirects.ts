@@ -3,7 +3,7 @@ export const configRedirects = [
   { path: "/sponsor", url: "https://forms.gle/fihWMesmfcR1M96f9" },
   { path: "/cfs", url: "https://sessionize.com/devfest-bandung-2023" },
   {
-    path: "/devfest",
+    path: "/devfest23",
     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2023/",
   },
   {
@@ -113,5 +113,13 @@ export const configRedirects = [
     {
       path: "/form-duit",
       url: "https://forms.gle/hELiovUuwouGsd8w6",
+    },
+    {
+      path: "/devfest",
+      url: "https://gdg.community.dev/e/m2qxyg/",
+    },
+    {
+      path: "/devfest-cfs",
+      url: "https://sessionize.com/devfest-bandung-2024/",
     },
 ];
