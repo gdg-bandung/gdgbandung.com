@@ -103,7 +103,7 @@ export const configRedirects = [
       url: "https://forms.gle/RjyLAhC8Gj3GccYm7",
     },
     {
-      path: "/sponsorship",
+      path: "/sponsorshipUnactive",
       url: "https://forms.gle/uQKgo9q8714GGTV86",
     },
     {
@@ -126,4 +126,12 @@ export const configRedirects = [
       path: "/devfest-cfs",
       url: "https://sessionize.com/devfest-bandung-2024/",
     },
+    {
+      path : "/sponsorship",
+      url : "https://forms.gle/m6BMJn8V8FG6qYGF7"
+    },
+    {
+      path : "/reimbursement",
+      url : "https://forms.gle/JZoaRuMQHAeyjW1w5"
+    }
 ];
