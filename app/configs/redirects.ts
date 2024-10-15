@@ -134,8 +134,13 @@ export const configRedirects = [
       path : "/reimbursement",
       url : "https://forms.gle/JZoaRuMQHAeyjW1w5"
     },
+    // {
+    //   path : "/committee",
+    //   url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
+    // }
+
     {
-      path : "/committe",
+      path : "/committee",
       url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
-    }
+    },
 ];
