@@ -133,5 +133,9 @@ export const configRedirects = [
     {
       path : "/reimbursement",
       url : "https://forms.gle/JZoaRuMQHAeyjW1w5"
+    },
+    {
+      path : "/committe",
+      url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
     }
 ];
