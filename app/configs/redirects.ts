@@ -143,4 +143,8 @@ export const configRedirects = [
       path : "/committee",
       url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
     },
+    {
+      path : "/confirmSpeaker",
+      url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
+    },
 ];
