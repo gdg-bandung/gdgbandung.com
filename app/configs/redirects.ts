@@ -120,7 +120,7 @@ export const configRedirects = [
     },
     {
       path: "/devfest",
-      url: "https://gdg.community.dev/e/m2qxyg/",
+      url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2024-1/",
     },
     {
       path: "/devfest-cfs",
@@ -134,11 +134,6 @@ export const configRedirects = [
       path : "/reimbursement",
       url : "https://forms.gle/JZoaRuMQHAeyjW1w5"
     },
-    // {
-    //   path : "/committee",
-    //   url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
-    // }
-
     {
       path : "/committee",
       url : "https://forms.gle/2ZB6Vj1dJEWc7Tbo7"
