@@ -142,4 +142,8 @@ export const configRedirects = [
       path : "/confirmSpeaker",
       url : "https://forms.gle/SukbEmC57cH9P6Xc8"
     },
+    {
+      path : "/ytta",
+      url : "https://gdg.community.dev/events/details/google-gdg-bandung-presents-road-to-devfest-bandung-2024/cohost-gdg-bandung"
+    },
 ];
