@@ -146,4 +146,8 @@ export const configRedirects = [
       path : "/ytta",
       url : "https://gdg.community.dev/events/details/google-gdg-bandung-presents-road-to-devfest-bandung-2024/cohost-gdg-bandung"
     },
+    {
+      path : "/confirmSponsor",
+      url : "https://forms.gle/KcahcRFhCnrQJeaQ8"
+    },
 ];
