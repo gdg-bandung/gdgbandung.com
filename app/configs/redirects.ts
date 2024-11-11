@@ -150,4 +150,8 @@ export const configRedirects = [
       path : "/confirmSponsor",
       url : "https://forms.gle/KcahcRFhCnrQJeaQ8"
     },
+    {
+      path : "/invoice",
+      url : "https://docs.google.com/forms/d/1tjewNp32xD9zYIER2OH53DnxH5prqlnBceZSqmhb8rw/viewform?chromeless=1&edit_requested=true"
+    },
 ];
