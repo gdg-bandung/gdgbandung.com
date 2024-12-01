@@ -158,4 +158,8 @@ export const configRedirects = [
       path : "/po-merch",
       url : "https://forms.gle/qL4vzsJqSD1ndcUG8"
     },
+    {
+      path : "/confirm-ppt",
+      url : "https://forms.gle/rG4FEDCdhydDErXd7"
+    },
 ];
