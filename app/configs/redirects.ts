@@ -162,4 +162,24 @@ export const configRedirects = [
       path : "/confirm-ppt",
       url : "https://forms.gle/rG4FEDCdhydDErXd7"
     },
+    {
+      path : "/devfest-faq",
+      url : "https://docs.google.com/document/d/1uyqPm335rn_urWC098fk2xcyFpzGMoylgczFsY1Awcs/edit?usp=sharing"
+    },
+    {
+      path : "/feedback-committee",
+      url : "https://forms.gle/whT732MBJJr1qZGVA"
+    },
+    {
+      path : "/feedback-sponsor",
+      url : "https://forms.gle/1Jy4UPeDd8zu4Ybb6"
+    },
+    {
+      path : "/feedback-speaker",
+      url : "https://forms.gle/ZckwnUv1ycofAq1y9"
+    },
+    {
+      path : "/feedback-participant",
+      url : "https://forms.gle/mZUfGdhBceGDjfDq7"
+    }
 ];
