@@ -181,5 +181,9 @@ export const configRedirects = [
     {
       path : "/feedback-participant",
       url : "https://forms.gle/mZUfGdhBceGDjfDq7"
+    },
+    {
+      path : "/live",
+      url : "https://www.youtube.com/watch?v=6aeZ7NyqBBI"
     }
 ];
