@@ -55,7 +55,7 @@ export const configRedirects = [
       url: "https://forms.gle/PMeub3jCVKvoaM5D9",
     },
     {
-      path: "/live",
+      path: "/live-nonactive-oow9923477",
       url: "https://www.youtube.com/live/blwoS74cdVE?si=ax2XSuvFThn7vqz9",
     },
     {
