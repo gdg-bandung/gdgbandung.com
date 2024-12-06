@@ -48,7 +48,7 @@ export const configRedirects = [
     },
     {
       path: "/feedback",
-      url: "https://forms.gle/SXkn8vKudfinVk9h6",
+      url: "https://forms.gle/mZUfGdhBceGDjfDq7",
     },
     {
       path: "/presensi",
