@@ -59,10 +59,6 @@ export const configRedirects = [
       url: "https://www.youtube.com/live/blwoS74cdVE?si=ax2XSuvFThn7vqz9",
     },
     {
-      path: "/feedback-sponsor",
-      url: "https://forms.gle/P98Umf3Xr2JNbfrZ9",
-    },
-    {
       path: "/mentoring",
       url: "https://forms.gle/Y1erUf9X7axeGz5ZA",
     },
