@@ -181,5 +181,10 @@ export const configRedirects = [
     {
       path : "/live",
       url : "https://www.youtube.com/watch?v=6aeZ7NyqBBI"
+    },
+    {
+      path : "/report-sponsor",
+      url : "https://drive.google.com/file/d/14xFG0wXQIzJxpZQXHhZrsNpLRBx8cVAt/view"
     }
+  
 ];
