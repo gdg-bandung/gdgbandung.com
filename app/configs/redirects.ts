@@ -187,7 +187,7 @@ export const configRedirects = [
       url : "https://drive.google.com/file/d/14xFG0wXQIzJxpZQXHhZrsNpLRBx8cVAt/view"
     },
     {
-      path : "/devfest-moments
+      path : "/devfest-moments",
       url : "https://drive.google.com/drive/folders/1O35jhYFBJYaXpSl4zYwgSHU-VRAa_5gV?usp=drive_link"
     }
   
