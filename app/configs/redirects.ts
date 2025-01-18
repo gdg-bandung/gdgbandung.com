@@ -189,6 +189,10 @@ export const configRedirects = [
     {
       path : "/devfest-moments",
       url : "https://drive.google.com/drive/folders/1O35jhYFBJYaXpSl4zYwgSHU-VRAa_5gV?usp=drive_link"
+    },
+    {
+      path: "/sertifikat-peserta",
+      url : "https://drive.google.com/drive/folders/1GHe6Qs_0w1oNPSKWqnSOzFeM5P3NcbTH?usp=sharing"
     }
   
 ];
