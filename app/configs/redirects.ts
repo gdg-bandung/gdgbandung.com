@@ -193,6 +193,18 @@ export const configRedirects = [
     {
       path: "/sertifikat-peserta",
       url : "https://drive.google.com/drive/folders/1GHe6Qs_0w1oNPSKWqnSOzFeM5P3NcbTH?usp=sharing"
+    },
+    {
+      path: "/shopee",
+      url : "https://s.shopee.co.id/5fZkM91S7N"
+    },
+    {
+      path: "/2025",
+      url : "https://drive.google.com/drive/folders/1K-WpHUn3IR-2jP1dGe3_tJa7Jm09-FcF?usp=drive_link"
+    },
+    {
+      path: "/2025-internal",
+      url : "https://drive.google.com/drive/folders/1GbTc8hrvQiuLxsryZ4WmL5GIsITCLai2?usp=sharing"
     }
   
 ];
