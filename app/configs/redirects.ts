@@ -205,6 +205,10 @@ export const configRedirects = [
     {
       path: "/2025-internal",
       url : "https://drive.google.com/drive/folders/1GbTc8hrvQiuLxsryZ4WmL5GIsITCLai2?usp=sharing"
+    },
+    {
+      path : "/juaragcp",
+      url : "https://gdg.community.dev/e/m5cjb3/"
     }
   
 ];
