@@ -209,6 +209,9 @@ export const configRedirects = [
     {
       path : "/juaragcp",
       url : "https://gdg.community.dev/e/m5cjb3/"
+    },
+    {
+      path : "/juaragcp-1",
+      url : "https://www.cloudskillsboost.google/course_templates/754"
     }
-  
 ];
