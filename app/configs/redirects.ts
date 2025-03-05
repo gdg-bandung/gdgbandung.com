@@ -222,4 +222,8 @@ export const configRedirects = [
       path : "/proposal-bsb",
       url : "https://drive.google.com/file/d/1nrONMV36CRKckGB-PaS71TfXDq13NluJ/view?usp=sharing"
     },
+    {
+      path : "/volunteer2025",
+      url : "https://forms.gle/tsKVrwpRM8S6EMpe9"
+    },
 ];
