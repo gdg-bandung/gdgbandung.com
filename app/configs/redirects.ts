@@ -213,5 +213,9 @@ export const configRedirects = [
     {
       path : "/juaragcp-1",
       url : "https://www.cloudskillsboost.google/course_templates/754"
-    }
+    },
+    {
+      path : "/cfs-bsb",
+      url : "https://forms.gle/wio1ZLv34vraWkUk6"
+    },
 ];
