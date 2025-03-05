@@ -218,4 +218,8 @@ export const configRedirects = [
       path : "/cfs-bsb",
       url : "https://forms.gle/wio1ZLv34vraWkUk6"
     },
+    {
+      path : "/proposal-bsb",
+      url : "https://drive.google.com/file/d/1nrONMV36CRKckGB-PaS71TfXDq13NluJ/view?usp=sharing"
+    },
 ];
