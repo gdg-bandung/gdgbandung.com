@@ -226,4 +226,8 @@ export const configRedirects = [
       path : "/volunteer2025",
       url : "https://forms.gle/tsKVrwpRM8S6EMpe9"
     },
+    {
+      path : "/bsb-donasi",
+      url : "https://forms.gle/km2ZL5kWKcUmfNig6"
+    }
 ];
