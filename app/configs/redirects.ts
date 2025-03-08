@@ -231,11 +231,11 @@ export const configRedirects = [
       url : "https://forms.gle/km2ZL5kWKcUmfNig6"
     },
     {
-      path : "/bsb-1",
+      path : "/bsb1",
       url : "https://forms.gle/XP99AAtHbZmFu1pm7"
     },
     {
-      path : "/bsb-2",
+      path : "/bsb2",
       url : "https://forms.gle/GkHrVZ6WoXBXBMyX7"
     }
 ];
