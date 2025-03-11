@@ -237,5 +237,45 @@ export const configRedirects = [
     {
       path : "/bsb2",
       url : "https://forms.gle/GkHrVZ6WoXBXBMyX7"
+    },
+    {
+      path : "/bsb3",
+      url : "https://forms.gle/z3x7sEnSh9a5HJt79"
+    },
+    {
+      path : "/bsb4",
+      url : "https://forms.gle/rxy9YUb21chZ8exR8"
+    },
+    {
+      path : "/bsb5",
+      url : "https://forms.gle/uwY3eVLWJ425vTWq8"
+    },
+    {
+      path : "/bsb6",
+      url : "https://forms.gle/hXb8PrLaC9LhdLVbA"
+    },
+    {
+      path : "/bsb1-feedback",
+      url : "https://forms.gle/12V7fiSqzsqejzoH6"
+    },
+    {
+      path : "/bsb2-feedback",
+      url : "https://forms.gle/wJvTfiVAsgPuuGwH8"
+    },
+    {
+      path : "/bsb3-feedback",
+      url : "https://forms.gle/6U1mQmijq6wqpj1f9"
+    },
+    {
+      path : "/bsb4",
+      url : "https://forms.gle/5Hgm69iu6DQfLHht6"
+    },
+    {
+      path : "/bsb5",
+      url : "https://forms.gle/eo91Cw48j5EFkbCt5"
+    },
+    {
+      path : "/bsb6",
+      url : "https://forms.gle/DKirHct3o4t7SNR96"
     }
 ];
