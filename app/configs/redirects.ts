@@ -277,5 +277,9 @@ export const configRedirects = [
     {
       path : "/bsb6",
       url : "https://forms.gle/DKirHct3o4t7SNR96"
+    },
+    {
+      path : "/bolt",
+      url : "https://bolt.new/?rid=wkmft0"
     }
 ];
