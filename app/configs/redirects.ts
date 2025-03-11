@@ -281,5 +281,9 @@ export const configRedirects = [
     {
       path : "/bolt",
       url : "https://bolt.new/?rid=wkmft0"
+    },
+    {
+      path : "/slido",
+      url : "https://app.sli.do/event/tqtZezzTgMAhA5YZPTVT7E"
     }
 ];
