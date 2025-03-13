@@ -285,5 +285,9 @@ export const configRedirects = [
     {
       path : "/slido",
       url : "https://app.sli.do/event/tqtZezzTgMAhA5YZPTVT7E"
+    },
+    {
+      path : "/bsb-vbg",
+      url : "https://drive.google.com/file/d/13yKuBoq1_sXugbEwpFWldD-gh4yNufX5/view?usp=sharing"
     }
 ];
