@@ -267,6 +267,14 @@ export const configRedirects = [
       url : "https://forms.gle/6U1mQmijq6wqpj1f9"
     },
     {
+      path : "/bsb6-feedback",
+      url : "https://forms.gle/zYRNjiRW86Cbk1yh9"
+    },
+    {
+      path : "/bsb7-feedback",
+      url : "https://forms.gle/6auBvsDrYEH9Vpsz6"
+    },
+    {
       path : "/bsb4",
       url : "https://forms.gle/5Hgm69iu6DQfLHht6"
     },
@@ -277,6 +285,10 @@ export const configRedirects = [
     {
       path : "/bsb6",
       url : "https://forms.gle/DKirHct3o4t7SNR96"
+    },
+    {
+      path : "/bsb7",
+      url : "https://forms.gle/GvUMDnbgQ6D31Whc7"
     },
     {
       path : "/bolt",
