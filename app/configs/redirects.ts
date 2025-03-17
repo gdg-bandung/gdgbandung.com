@@ -301,5 +301,21 @@ export const configRedirects = [
     {
       path : "/bsb-vbg",
       url : "https://drive.google.com/file/d/13yKuBoq1_sXugbEwpFWldD-gh4yNufX5/view?usp=sharing"
-    }
+    },
+    {
+      path : "/bsb8",
+      url : "https://forms.gle/12iy6hLPM5mgaU9r6"
+    },
+    {
+      path : "/bsb9",
+      url : "https://forms.gle/2uSU3MLLKphZjGod8"
+    },
+    {
+      path : "/bsb8-feedback",
+      url : "https://forms.gle/6Nu6rG8WeG1iVVEW9"
+    },
+    {
+      path : "/bsb9-feedback",
+      url : "https://forms.gle/PxKofpbkYWj44maUA"
+    },
 ];
