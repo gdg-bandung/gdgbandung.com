@@ -304,7 +304,7 @@ export const configRedirects = [
   },
   {
     path: "/bsb8",
-    url: "https://youtube.com",
+    url: "https://forms.gle/12iy6hLPM5mgaU9r6",
   },
   {
     path: "/bsb9",
