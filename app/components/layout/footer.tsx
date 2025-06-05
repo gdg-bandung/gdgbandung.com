@@ -85,7 +85,7 @@ export default function Footer() {
                   to="/terms-and-conditions"
                   className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
                 >
-                  Terms and Conditions
+                  Request for Media Partner
                 </Link>
               </div>
             </div>
