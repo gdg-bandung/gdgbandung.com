@@ -1,24 +1,46 @@
-import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { redirectRouteToURL } from "~/utils";
+import { useEffect } from "react";
+import Header from "~/components/header";
+import Hero from "~/components/hero";
+import Events from "~/components/events";
+import About from "~/components/about";
+import Partnership from "~/components/partnership";
+import Footer from "~/components/footer";
+import EventSeries from "~/components/event-series";
+import type { Route } from "./+types/_index";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "GDG Bandung" },
-    {
-      name: "description",
-      content: "Welcome to GDG Bandung community website.",
-    },
-  ];
-};
+export const links: Route.LinksFunction = () => [
+  {
+    rel: "preload",
+    href: "/hero-banner.webp",
+    as: "image",
+  },
+];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return redirectRouteToURL(request);
-};
+export default function Home() {
+  useEffect(() => {
+    // Handle URL hash for smooth scrolling to sections
+    const { hash } = window.location;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, []);
 
-export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to GDG Bandung</h1>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main>
+        <Hero />
+        <Events />
+        <About />
+        <EventSeries />
+        <Partnership />
+      </main>
+      <Footer />
     </div>
   );
 }
