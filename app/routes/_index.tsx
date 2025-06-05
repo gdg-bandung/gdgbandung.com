@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import Header from "~/components/landing-page/header";
+import Header from "~/components/utils/header";
 import Hero from "~/components/landing-page/hero";
 import Events from "~/components/landing-page/events";
 import About from "~/components/landing-page/about";
 import Partnership from "~/components/landing-page/partnership";
-import Footer from "~/components/landing-page/footer";
+import Footer from "~/components/utils/footer";
 import EventSeries from "~/components/landing-page/event-series";
 import type { Route } from "./+types/_index";
 import Gallery from "~/components/landing-page/gallery";
