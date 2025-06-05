@@ -39,16 +39,15 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Definitions */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-gdg-blue" />
+              <CardTitle className="font-semibold text-xl">
                 Definitions
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div>
+              <ul className="space-y-4 list-disc ml-6">
+                <li>
                   <h4 className="font-semibold text-gray-900 mb-2">
                     GDG Bandung:
                   </h4>
@@ -56,8 +55,8 @@ export default function TermsAndConditions() {
                     A developer community focused on Google technologies in
                     Bandung, acting as the party providing media support.
                   </p>
-                </div>
-                <div>
+                </li>
+                <li>
                   <h4 className="font-semibold text-gray-900 mb-2">
                     Event Organizer:
                   </h4>
@@ -65,16 +64,16 @@ export default function TermsAndConditions() {
                     An entity or individual organizing an event and submitting a
                     request to GDG Bandung to become a Media Partner.
                   </p>
-                </div>
-                <div>
+                </li>
+                <li>
                   <h4 className="font-semibold text-gray-900 mb-2">Event:</h4>
                   <p className="text-gray-700 leading-relaxed">
                     Activities, meetings, workshops, seminars, conferences, or
                     other initiatives organized by the Event Organizer and
                     subject to this media partnership.
                   </p>
-                </div>
-                <div>
+                </li>
+                <li>
                   <h4 className="font-semibold text-gray-900 mb-2">
                     Promotional Materials:
                   </h4>
@@ -85,8 +84,8 @@ export default function TermsAndConditions() {
                     created by GDG Bandung based on information from the Event
                     Organizer with approval.
                   </p>
-                </div>
-                <div>
+                </li>
+                <li>
                   <h4 className="font-semibold text-gray-900 mb-2">
                     Media Partnership:
                   </h4>
@@ -95,16 +94,15 @@ export default function TermsAndConditions() {
                     publication support for the Event Organizer's Event in
                     accordance with these Terms and Conditions.
                   </p>
-                </div>
-              </div>
+                </li>
+              </ul>
             </CardContent>
           </Card>
 
           {/* Objectives */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-gdg-green" />
+              <CardTitle className="font-semibold text-xl">
                 Objectives of Media Partnership with GDG Bandung
               </CardTitle>
             </CardHeader>
@@ -128,10 +126,9 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* What GDG Bandung Offers */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Handshake className="h-5 w-5 text-gdg-blue" />
+              <CardTitle className="font-semibold text-xl">
                 What Can GDG Bandung Offer as a Media Partner?
               </CardTitle>
             </CardHeader>
@@ -164,10 +161,9 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* What We Expect */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-gdg-red" />
+              <CardTitle className="font-semibold text-xl">
                 What We Expect from You (Event Organizer)
               </CardTitle>
             </CardHeader>
@@ -242,9 +238,11 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Content Guidelines */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle>Content and Publication Guidelines</CardTitle>
+              <CardTitle className="font-semibold text-xl">
+                Content and Publication Guidelines
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -271,9 +269,11 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Logo Usage */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle>Logo Usage</CardTitle>
+              <CardTitle className="font-semibold text-xl">
+                Logo Usage
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -293,10 +293,9 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Application Process */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5 text-gdg-green" />
+              <CardTitle className="font-semibold text-xl">
                 Media Partnership Application Process
               </CardTitle>
             </CardHeader>
@@ -325,10 +324,9 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Event Changes */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-gdg-yellow" />
+              <CardTitle className="font-semibold text-xl">
                 Event Cancellation or Changes
               </CardTitle>
             </CardHeader>
@@ -348,9 +346,11 @@ export default function TermsAndConditions() {
           </Card>
 
           {/* Disclaimer */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle>Disclaimer</CardTitle>
+              <CardTitle className="font-semibold text-xl">
+                Disclaimer
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="list-disc list-inside space-y-2 text-gray-700">

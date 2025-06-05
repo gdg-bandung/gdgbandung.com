@@ -126,9 +126,11 @@ export default function CodeOfConduct() {
           </Card>
 
           {/* Why This Policy is Important */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle>Why This Policy is Important</CardTitle>
+              <CardTitle className="font-semibold text-xl">
+                Why This Policy is Important
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-700 leading-relaxed">
@@ -145,9 +147,11 @@ export default function CodeOfConduct() {
           </Card>
 
           {/* License and Attribution */}
-          <Card>
+          <Card className="gap-2">
             <CardHeader>
-              <CardTitle>License and Attribution</CardTitle>
+              <CardTitle className="font-semibold text-xl">
+                License and Attribution
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-700 leading-relaxed">
