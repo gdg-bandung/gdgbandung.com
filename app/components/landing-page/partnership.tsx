@@ -1,6 +1,6 @@
 import { Card, CardContent } from "~/components/ui/card";
 import { PARTNER_DATA, WHY_PARTNER } from "~/data/partner";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export default function Partnership() {
   return (

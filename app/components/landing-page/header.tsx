@@ -4,7 +4,12 @@ import { Button } from "~/components/ui/button";
 import { useScroll } from "~/hooks/use-scroll";
 import { cn } from "~/lib/utils";
 import { Link, useLocation } from "react-router";
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from "./ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+} from "../ui/drawer";
 import handleHashNavigation from "~/helper/handleHashNavigation";
 
 const navItems = [

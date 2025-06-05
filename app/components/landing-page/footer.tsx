@@ -9,7 +9,7 @@ import {
   Twitter,
   Users,
 } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Link } from "react-router";
 import { CHANNEL, SOCIAL_MEDIA } from "~/data/footer";
 
@@ -68,6 +68,27 @@ export default function Footer() {
 
           {/* Join Community Button */}
           <div className="text-center md:text-right">
+            <p className="font-semibold text-white mb-4">
+              Google Developer Group
+            </p>
+            <div className="space-y-2 mb-6">
+              <div>
+                <Link
+                  to="/code-of-conduct"
+                  className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
+                >
+                  Code of Conduct
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to="/terms-and-conditions"
+                  className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
+                >
+                  Terms and Conditions
+                </Link>
+              </div>
+            </div>
             <p className="font-semibold text-white mb-4">Join Our Community</p>
             <Button
               className="bg-gdg-blue hover:bg-blue-600 duration-300 ease-in-out text-white"

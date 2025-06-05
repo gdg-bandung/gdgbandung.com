@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import Header from "~/components/header";
-import Hero from "~/components/hero";
-import Events from "~/components/events";
-import About from "~/components/about";
-import Partnership from "~/components/partnership";
-import Footer from "~/components/footer";
-import EventSeries from "~/components/event-series";
+import Header from "~/components/landing-page/header";
+import Hero from "~/components/landing-page/hero";
+import Events from "~/components/landing-page/events";
+import About from "~/components/landing-page/about";
+import Partnership from "~/components/landing-page/partnership";
+import Footer from "~/components/landing-page/footer";
+import EventSeries from "~/components/landing-page/event-series";
 import type { Route } from "./+types/_index";
 
 export const links: Route.LinksFunction = () => [
