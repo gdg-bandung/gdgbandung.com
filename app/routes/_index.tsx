@@ -7,6 +7,7 @@ import Partnership from "~/components/landing-page/partnership";
 import Footer from "~/components/landing-page/footer";
 import EventSeries from "~/components/landing-page/event-series";
 import type { Route } from "./+types/_index";
+import Gallery from "~/components/landing-page/gallery";
 
 export const links: Route.LinksFunction = () => [
   {
@@ -39,6 +40,7 @@ export default function Home() {
         <About />
         <EventSeries />
         <Partnership />
+        <Gallery />
       </main>
       <Footer />
     </div>
