@@ -11,4 +11,9 @@ export const configRedirects = [
   //     path: "/devfest25",
   //     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2025/",
   //   },
+
+  {
+    path: "/bwai-doc",
+    url: "https://drive.google.com/drive/folders/14Perdt75vy9TA-iXb7pPyeSJy0UuNkg_?hl=ID"
+  }
 ];
