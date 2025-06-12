@@ -11,6 +11,10 @@ export const configRedirects = [
     path: "/devfest-tor",
     url: "https://docs.google.com/document/d/1SoQmDa-d9NNUxbVw35eAqxdokker_FUDq3jQvCm0I6g/edit?usp=sharing",
   },
+  {
+    path: "/devfest-slide-template",
+    url: "https://docs.google.com/presentation/d/1SgexbAwG48vw9ROOdvmPVR4aA-lpu5o6YCuG8a9oXOM/edit?usp=sharing",
+  },
   // TODO: Add redirect for devfest25
   //   {
   //     path: "/devfest25",
