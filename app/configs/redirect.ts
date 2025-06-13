@@ -15,6 +15,10 @@ export const configRedirects = [
     path: "/devfest-slide-template",
     url: "https://docs.google.com/presentation/d/1SgexbAwG48vw9ROOdvmPVR4aA-lpu5o6YCuG8a9oXOM/edit?usp=sharing",
   },
+    {
+    path: "/iox25",
+    url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-google-io-extended-bandung-2025-1/",
+  },
   // TODO: Add redirect for devfest25
   //   {
   //     path: "/devfest25",
