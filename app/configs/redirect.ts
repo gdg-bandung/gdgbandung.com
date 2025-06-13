@@ -1,8 +1,8 @@
 export const configRedirects = [
-  {
-    path: "/iox25",
-    url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-google-io-extended-bandung-2025/",
-  },
+  // {
+  //   path: "/iox25",
+  //   url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-google-io-extended-bandung-2025/",
+  // },
   // DevFest Bandung 2025
   {
     path: "/devfest-sponsorship",
