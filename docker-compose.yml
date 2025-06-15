@@ -1,0 +1,16 @@
+# https://docs.docker.com/engine/reference/commandline/compose_up
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: gdgbandung-postgres
+    hostname: database
+    restart: no
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

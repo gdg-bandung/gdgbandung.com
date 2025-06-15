@@ -1,8 +1,14 @@
-# Welcome to React Router!
+# GDG Bandung Website
 
-A modern, production-ready template for building full-stack React applications using React Router.
+The official website for Google Developer Group Bandung, built with modern web technologies to showcase our community activities, events, and member resources.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Tech Stack
+
+- **Framework**: React with React Router V7 and Vite
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: BetterAuth
+- **Styling**: TailwindCSS
+- **Type Safety**: TypeScript
 
 ## Features
 
@@ -16,72 +22,66 @@ A modern, production-ready template for building full-stack React applications u
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js (v18 or higher)
+- PostgreSQL
+- Bun
+
 ### Installation
 
-Install the dependencies:
-
+1. Clone the repository:
 ```bash
-npm install
+git clone https://github.com/gdg-bandung/gdgbandung.com.git
 ```
 
-### Development
-
-Start the development server with HMR:
-
+2. Install dependencies:
 ```bash
-npm run dev
+bun install
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
+3. Copy `.env.example` to `.env` and configure your environment variables:
 ```bash
-npm run build
+cp .env.example .env
 ```
 
-## Deployment
+4. Set up your PostgreSQL database and update the database URL in `.env`
 
-### Docker Deployment
-
-To build and run using Docker:
-
+5. Start the development server:
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+bun run dev
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+The application will be available at `http://localhost:5173`
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+### Environment Variables
 
-### DIY Deployment
+Make sure to configure the following environment variables in your `.env` file:
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+- `DATABASE_URL`: Your PostgreSQL database URL
+- `SESSION_SECRET`: Secret key for session management
+- `NEXT_PUBLIC_SITE_URL`: Public URL of your site
+- Other configuration variables as needed
 
-Make sure to deploy the output of `npm run build`
+## Contributing
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Styling
+## License
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## Contact
+
+For any questions or support, please contact the GDG Bandung team at:
+- Email: info@gdgbandung.com
+- GitHub: @gdg-bandung
+- Twitter: @GDG_Bandung
 
 ---
 
-Built with ❤️ using React Router.
+Built with ❤️ by the GDG Bandung community

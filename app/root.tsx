@@ -12,6 +12,7 @@ import "./index.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "~/utils/query-client";
+import { Toaster } from "sonner";
 
 export const links: Route.LinksFunction = () => [
   {
@@ -75,6 +76,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster />
       <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
     </QueryClientProvider>
   );
