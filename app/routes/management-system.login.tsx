@@ -13,6 +13,11 @@ import type { Route } from "./+types/_index";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
+// temporary
+export async function loader() {
+  return redirect("/");
+}
+
 export async function action({ request }: Route.ActionArgs) {
   try {
     const formData = await request.formData();
