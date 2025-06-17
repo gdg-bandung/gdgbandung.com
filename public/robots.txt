@@ -1,0 +1,79 @@
+# Robots.txt for gdgbandung.com
+# Google Developer Group Bandung
+
+# Allow all crawlers to access the site
+User-agent: *
+Allow: /
+
+# Disallow common admin and sensitive directories
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /config/
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /cache/
+
+# Disallow specific file types that shouldn't be indexed
+Disallow: /*.json$
+Disallow: /*.xml$ 
+Disallow: /*.log$
+Disallow: /*.backup$
+Disallow: /*.bak$
+
+# Allow important assets and media
+Allow: /images/
+Allow: /gallery/
+Allow: /assets/
+Allow: /static/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /favicon-96x96.png
+Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
+
+# Special rules for Googlebot (since this is a Google Developer Group)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Special rules for Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://gdgbandung.com/sitemap.xml
+
+# Host directive (optional, but recommended)
+Host: gdgbandung.com
