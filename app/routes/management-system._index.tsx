@@ -9,7 +9,7 @@ import {
   Filter,
 } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { Input, InputWithLabel } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import {
   Card,
@@ -64,10 +64,11 @@ import {
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from "react-router";
-import { authClient } from "~/lib/auth-client";
 import { createUrl, getUrls } from "~/services/url";
 import type { Url, UrlWithoutCreatedAtUpdatedAt } from "~/type/url";
 import { urlForm } from "~/schemas/url";
+import AddUrlModal from "~/components/management-system/add-url-modal";
+import LayoutMS from "~/components/management-system/layout";
 
 const DOMAIN = "gdgbandung.com/";
 
@@ -250,74 +251,8 @@ export default function HomeMS() {
     });
   };
 
-  const handleLogout = async () => {
-    await authClient.signOut();
-    toast.success("Logged Out", {
-      description: "You have been logged out successfully.",
-    });
-    navigate("/management-system/login");
-  };
-
-  console.log(fetcher.data);
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <img
-                  src="/full-logo.svg"
-                  alt="GDG Bandung Logo"
-                  className="h-10"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              {/* User Profile Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="relative h-10 w-10 rounded-full cursor-pointer"
-                    type="button"
-                    onClick={handleLogout}
-                  >
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={user.image!} />
-                      <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">
-                        {user.name}
-                      </p>
-                      <p className="text-xs leading-none text-muted-foreground">
-                        {user.email}
-                      </p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleLogout}
-                    className="text-red-600 cursor-pointer"
-                  >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <LayoutMS user={user}>
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
@@ -385,153 +320,11 @@ export default function HomeMS() {
                 <CardTitle>URL Management</CardTitle>
                 <CardDescription>Manage your shortened URLs</CardDescription>
               </div>
-              <Dialog
-                open={isCreateDialogOpen}
-                onOpenChange={setIsCreateDialogOpen}
-              >
-                <DialogTrigger asChild>
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create Short URL
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[600px]">
-                  <fetcher.Form method="post">
-                    <DialogHeader>
-                      <DialogTitle>Create New Short URL</DialogTitle>
-                      <DialogDescription>
-                        Create a new shortened URL for your content
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="shortCode" className="text-left">
-                          Short Code
-                        </Label>
-                        <div className="col-span-3 flex flex-col">
-                          <div className="flex items-center gap-2">
-                            <p className="text-muted-foreground hidden md:block">
-                              gdgbandung.com/
-                            </p>
-                            <Input
-                              id="shortCode"
-                              name="shortCode"
-                              className="w-full"
-                              placeholder="e.g., gdg-event-2024"
-                            />
-                          </div>
-                          {fetcher.data?.error?.shortCode?.length > 0 && (
-                            <p className="text-red-600">
-                              {
-                                fetcher.data.error.shortCode[
-                                  fetcher.data.error.shortCode.length - 1
-                                ]
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="originalUrl" className="text-left">
-                          Original URL
-                        </Label>
-                        <div className="col-span-3 flex flex-col">
-                          <Input
-                            id="originalUrl"
-                            name="originalUrl"
-                            placeholder="https://example.com/long-url"
-                          />
-                          {fetcher.data?.error?.originalUrl?.length > 0 && (
-                            <p className="text-red-600">
-                              {
-                                fetcher.data.error.originalUrl[
-                                  fetcher.data.error.originalUrl.length - 1
-                                ]
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="title" className="text-left">
-                          Title
-                        </Label>
-                        <div className="col-span-3 flex flex-col">
-                          <Input
-                            id="title"
-                            name="title"
-                            placeholder="URL Title"
-                          />
-                          {fetcher.data?.error?.title?.length > 0 && (
-                            <p className="text-red-600">
-                              {
-                                fetcher.data.error.title[
-                                  fetcher.data.error.title.length - 1
-                                ]
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="expiresAt" className="text-left">
-                          Expires At
-                        </Label>
-                        <div className="col-span-3 flex flex-col">
-                          <Input id="expiresAt" name="expiresAt" type="date" />
-                          {fetcher.data?.error?.expiresAt?.length > 0 && (
-                            <p className="text-red-600">
-                              {
-                                fetcher.data.error.expiresAt[
-                                  fetcher.data.error.expiresAt.length - 1
-                                ]
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="isActive" className="text-left">
-                          Active
-                        </Label>
-                        <div className="col-span-3 flex flex-col">
-                          <Switch
-                            id="isActive"
-                            name="isActive"
-                            defaultChecked
-                          />
-                          {fetcher.data?.error?.isActive?.length > 0 && (
-                            <p className="text-red-600">
-                              {
-                                fetcher.data.error.isActive[
-                                  fetcher.data.error.isActive.length - 1
-                                ]
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button
-                        variant="outline"
-                        type="button"
-                        className="cursor-pointer"
-                        onClick={() => setIsCreateDialogOpen(false)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        disabled={fetcher.state !== "idle"}
-                        className="bg-blue-600 hover:bg-blue-700 cursor-pointer"
-                      >
-                        Create URL
-                      </Button>
-                    </DialogFooter>
-                  </fetcher.Form>
-                </DialogContent>
-              </Dialog>
+              <AddUrlModal
+                isCreateDialogOpen={isCreateDialogOpen}
+                setIsCreateDialogOpen={setIsCreateDialogOpen}
+                fetcher={fetcher}
+              />
             </div>
 
             {/* Filters */}
@@ -791,6 +584,6 @@ export default function HomeMS() {
           </DialogContent>
         </Dialog>
       </main>
-    </div>
+    </LayoutMS>
   );
 }
