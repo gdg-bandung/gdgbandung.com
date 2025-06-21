@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Plus,
   Edit,
@@ -58,50 +58,16 @@ import { toast } from "sonner";
 import { auth } from "~/lib/auth.server";
 import {
   redirect,
+  useFetcher,
   useLoaderData,
   useNavigate,
+  type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from "react-router";
 import { authClient } from "~/lib/auth-client";
-
-interface UrlEntry {
-  id: string;
-  shortCode: string;
-  originalUrl: string;
-  title: string;
-  isActive: boolean;
-  createdAt: string;
-  expiresAt?: string;
-}
-
-const mockData: UrlEntry[] = [
-  {
-    id: "1",
-    shortCode: "gdg-event-2024",
-    originalUrl: "https://gdgbandung.com/events/tech-talk-2024",
-    title: "GDG Tech Talk 2024",
-    isActive: true,
-    createdAt: "2024-01-15",
-    expiresAt: "2024-12-31",
-  },
-  {
-    id: "2",
-    shortCode: "workshop-ai",
-    originalUrl: "https://gdgbandung.com/workshops/ai-machine-learning",
-    title: "AI & ML Workshop",
-    isActive: true,
-    createdAt: "2024-02-01",
-  },
-  {
-    id: "3",
-    shortCode: "community-meet",
-    originalUrl: "https://gdgbandung.com/meetups/monthly-gathering",
-    title: "Monthly Community Meetup",
-    isActive: false,
-    createdAt: "2024-01-20",
-    expiresAt: "2024-03-20",
-  },
-];
+import { createUrl, getUrls } from "~/services/url";
+import type { Url, UrlWithoutCreatedAtUpdatedAt } from "~/type/url";
+import { urlForm } from "~/schemas/url";
 
 const DOMAIN = "gdgbandung.com/";
 
@@ -121,101 +87,125 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return redirect("/management-system/login");
   }
 
-  return session.user;
+  const urls = await getUrls();
+
+  return {
+    user: session.user,
+    response: urls,
+  };
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  if (!session?.user) {
+    return redirect("/management-system/login");
+  }
+
+  const formData = await request.formData();
+
+  const shortCode = formData.get("shortCode");
+  const originalUrl = formData.get("originalUrl");
+  const title = formData.get("title");
+  const isActive = formData.get("isActive");
+  const expiresAt = formData.get("expiresAt");
+
+  const urlChecked = urlForm.safeParse({
+    shortCode,
+    originalUrl,
+    title,
+    isActive: isActive === "on",
+    expiresAt: expiresAt ? new Date(expiresAt as string) : undefined,
+  });
+
+  if (!urlChecked.success) {
+    const error = urlChecked.error.flatten().fieldErrors;
+    return {
+      acknowledge: false,
+      form: "create",
+      error,
+    };
+  }
+
+  const urlData: Omit<UrlWithoutCreatedAtUpdatedAt, "id"> = {
+    shortCode: urlChecked.data.shortCode,
+    originalUrl: urlChecked.data.originalUrl,
+    title: urlChecked.data.title,
+    isActive: urlChecked.data.isActive,
+    expiresAt: urlChecked.data.expiresAt,
+  };
+
+  await createUrl(urlData);
+
+  return {
+    acknowledge: true,
+    form: "create",
+    error: null,
+  };
 }
 
 export default function HomeMS() {
   const navigate = useNavigate();
+  const fetcher = useFetcher();
 
-  const user = useLoaderData<typeof loader>();
+  const { user, response } = useLoaderData<typeof loader>();
 
-  const [urls, setUrls] = useState<UrlEntry[]>(mockData);
+  const urls = response.data;
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editingUrl, setEditingUrl] = useState<UrlEntry | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
-  const [selectedUrlForQR, setSelectedUrlForQR] = useState<UrlEntry | null>(
-    null
-  );
+  const [selectedUrlForQR, setSelectedUrlForQR] = useState<Url | null>(null);
 
-  const [formData, setFormData] = useState({
-    shortCode: "",
-    originalUrl: "",
-    title: "",
-    expiresAt: "",
-    isActive: true,
-  });
+  useEffect(() => {
+    if (fetcher.data?.acknowledge && fetcher.data.form === "create") {
+      toast.success("URL Created", {
+        description: "Short URL has been created successfully.",
+      });
+      setIsCreateDialogOpen(false);
+    }
+  }, [fetcher.data]);
 
-  const resetForm = () => {
-    setFormData({
-      shortCode: "",
-      originalUrl: "",
-      title: "",
-      expiresAt: "",
-      isActive: true,
-    });
-  };
-
-  const handleCreate = () => {
-    const newUrl: UrlEntry = {
-      id: Date.now().toString(),
-      shortCode: formData.shortCode,
-      originalUrl: formData.originalUrl,
-      title: formData.title,
-      isActive: formData.isActive,
-      createdAt: new Date().toISOString().split("T")[0],
-      expiresAt: formData.expiresAt || undefined,
-    };
-
-    setUrls([...urls, newUrl]);
-    setIsCreateDialogOpen(false);
-    resetForm();
-    toast.success("URL Created", {
-      description: "Short URL has been created successfully.",
-    });
-  };
-
-  const handleEdit = (url: UrlEntry) => {
-    setEditingUrl(url);
-    setFormData({
-      shortCode: url.shortCode,
-      originalUrl: url.originalUrl,
-      title: url.title,
-      expiresAt: url.expiresAt || "",
-      isActive: url.isActive,
-    });
-    setIsEditDialogOpen(true);
+  const handleEdit = (url: Url) => {
+    // setEditingUrl(url);
+    // setFormData({
+    //   shortCode: url.shortCode,
+    //   originalUrl: url.originalUrl,
+    //   title: url.title,
+    //   expiresAt: url.expiresAt,
+    //   isActive: url.isActive,
+    // });
+    // setIsEditDialogOpen(true);
   };
 
   const handleUpdate = () => {
-    if (!editingUrl) return;
-
-    const updatedUrls = urls.map((url) =>
-      url.id === editingUrl.id
-        ? {
-            ...url,
-            shortCode: formData.shortCode,
-            originalUrl: formData.originalUrl,
-            title: formData.title,
-            expiresAt: formData.expiresAt || undefined,
-            isActive: formData.isActive,
-          }
-        : url
-    );
-
-    setUrls(updatedUrls);
-    setIsEditDialogOpen(false);
-    setEditingUrl(null);
-    resetForm();
-    toast.success("URL Updated", {
-      description: "Short URL has been updated successfully.",
-    });
+    // if (!editingUrl) return;
+    // const updatedUrls = urls.map((url) =>
+    //   url.id === editingUrl.id
+    //     ? {
+    //         ...url,
+    //         shortCode: formData.shortCode,
+    //         originalUrl: formData.originalUrl,
+    //         title: formData.title,
+    //         expiresAt: formData.expiresAt || undefined,
+    //         isActive: formData.isActive,
+    //       }
+    //     : url
+    // );
+    // // setUrls(updatedUrls);
+    // setIsEditDialogOpen(false);
+    // setEditingUrl(null);
+    // resetForm();
+    // toast.success("URL Updated", {
+    //   description: "Short URL has been updated successfully.",
+    // });
   };
 
   const handleDelete = (id: string) => {
-    setUrls(urls.filter((url) => url.id !== id));
+    // setUrls(urls.filter((url) => url.id !== id));
     toast.success("URL Deleted", {
       description: "Short URL has been deleted successfully.",
     });
@@ -242,7 +232,7 @@ export default function HomeMS() {
     return matchesSearch && matchesStatus;
   });
 
-  const showQRCode = (url: UrlEntry) => {
+  const showQRCode = (url: Url) => {
     setSelectedUrlForQR(url);
     setQrDialogOpen(true);
   };
@@ -267,6 +257,8 @@ export default function HomeMS() {
     });
     navigate("/management-system/login");
   };
+
+  console.log(fetcher.data);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -404,105 +396,140 @@ export default function HomeMS() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[600px]">
-                  <DialogHeader>
-                    <DialogTitle>Create New Short URL</DialogTitle>
-                    <DialogDescription>
-                      Create a new shortened URL for your content
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="shortCode" className="text-right">
-                        Short Code
-                      </Label>
-                      <Input
-                        id="shortCode"
-                        value={formData.shortCode}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            shortCode: e.target.value,
-                          })
-                        }
-                        className="col-span-3"
-                        placeholder="e.g., gdg-event-2024"
-                      />
+                  <fetcher.Form method="post">
+                    <DialogHeader>
+                      <DialogTitle>Create New Short URL</DialogTitle>
+                      <DialogDescription>
+                        Create a new shortened URL for your content
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="shortCode" className="text-left">
+                          Short Code
+                        </Label>
+                        <div className="col-span-3 flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <p className="text-muted-foreground hidden md:block">
+                              gdgbandung.com/
+                            </p>
+                            <Input
+                              id="shortCode"
+                              name="shortCode"
+                              className="w-full"
+                              placeholder="e.g., gdg-event-2024"
+                            />
+                          </div>
+                          {fetcher.data?.error?.shortCode?.length > 0 && (
+                            <p className="text-red-600">
+                              {
+                                fetcher.data.error.shortCode[
+                                  fetcher.data.error.shortCode.length - 1
+                                ]
+                              }
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="originalUrl" className="text-left">
+                          Original URL
+                        </Label>
+                        <div className="col-span-3 flex flex-col">
+                          <Input
+                            id="originalUrl"
+                            name="originalUrl"
+                            placeholder="https://example.com/long-url"
+                          />
+                          {fetcher.data?.error?.originalUrl?.length > 0 && (
+                            <p className="text-red-600">
+                              {
+                                fetcher.data.error.originalUrl[
+                                  fetcher.data.error.originalUrl.length - 1
+                                ]
+                              }
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="title" className="text-left">
+                          Title
+                        </Label>
+                        <div className="col-span-3 flex flex-col">
+                          <Input
+                            id="title"
+                            name="title"
+                            placeholder="URL Title"
+                          />
+                          {fetcher.data?.error?.title?.length > 0 && (
+                            <p className="text-red-600">
+                              {
+                                fetcher.data.error.title[
+                                  fetcher.data.error.title.length - 1
+                                ]
+                              }
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="expiresAt" className="text-left">
+                          Expires At
+                        </Label>
+                        <div className="col-span-3 flex flex-col">
+                          <Input id="expiresAt" name="expiresAt" type="date" />
+                          {fetcher.data?.error?.expiresAt?.length > 0 && (
+                            <p className="text-red-600">
+                              {
+                                fetcher.data.error.expiresAt[
+                                  fetcher.data.error.expiresAt.length - 1
+                                ]
+                              }
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="isActive" className="text-left">
+                          Active
+                        </Label>
+                        <div className="col-span-3 flex flex-col">
+                          <Switch
+                            id="isActive"
+                            name="isActive"
+                            defaultChecked
+                          />
+                          {fetcher.data?.error?.isActive?.length > 0 && (
+                            <p className="text-red-600">
+                              {
+                                fetcher.data.error.isActive[
+                                  fetcher.data.error.isActive.length - 1
+                                ]
+                              }
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="originalUrl" className="text-right">
-                        Original URL
-                      </Label>
-                      <Input
-                        id="originalUrl"
-                        value={formData.originalUrl}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            originalUrl: e.target.value,
-                          })
-                        }
-                        className="col-span-3"
-                        placeholder="https://example.com/long-url"
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="title" className="text-right">
-                        Title
-                      </Label>
-                      <Input
-                        id="title"
-                        value={formData.title}
-                        onChange={(e) =>
-                          setFormData({ ...formData, title: e.target.value })
-                        }
-                        className="col-span-3"
-                        placeholder="URL Title"
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="expiresAt" className="text-right">
-                        Expires At
-                      </Label>
-                      <Input
-                        id="expiresAt"
-                        type="date"
-                        value={formData.expiresAt}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            expiresAt: e.target.value,
-                          })
-                        }
-                        className="col-span-3"
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="isActive" className="text-right">
-                        Active
-                      </Label>
-                      <Switch
-                        id="isActive"
-                        checked={formData.isActive}
-                        onCheckedChange={(checked) =>
-                          setFormData({ ...formData, isActive: checked })
-                        }
-                      />
-                    </div>
-                  </div>
-                  <DialogFooter>
-                    <Button
-                      variant="outline"
-                      onClick={() => setIsCreateDialogOpen(false)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={handleCreate}
-                      className="bg-blue-600 hover:bg-blue-700"
-                    >
-                      Create URL
-                    </Button>
-                  </DialogFooter>
+                    <DialogFooter>
+                      <Button
+                        variant="outline"
+                        type="button"
+                        className="cursor-pointer"
+                        onClick={() => setIsCreateDialogOpen(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        disabled={fetcher.state !== "idle"}
+                        className="bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                      >
+                        Create URL
+                      </Button>
+                    </DialogFooter>
+                  </fetcher.Form>
                 </DialogContent>
               </Dialog>
             </div>
@@ -583,7 +610,7 @@ export default function HomeMS() {
                           {url.isActive ? "Active" : "Inactive"}
                         </Badge>
                       </TableCell>
-                      <TableCell>{url.createdAt}</TableCell>
+                      <TableCell>{url.createdAt.toISOString()}</TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
                           <Button
@@ -632,68 +659,68 @@ export default function HomeMS() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-shortCode" className="text-right">
+                <Label htmlFor="edit-shortCode" className="text-left">
                   Short Code
                 </Label>
                 <Input
                   id="edit-shortCode"
-                  value={formData.shortCode}
-                  onChange={(e) =>
-                    setFormData({ ...formData, shortCode: e.target.value })
-                  }
+                  // value={formData.shortCode}
+                  // onChange={(e) =>
+                  //   setFormData({ ...formData, shortCode: e.target.value })
+                  // }
                   className="col-span-3"
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-originalUrl" className="text-right">
+                <Label htmlFor="edit-originalUrl" className="text-left">
                   Original URL
                 </Label>
                 <Input
                   id="edit-originalUrl"
-                  value={formData.originalUrl}
-                  onChange={(e) =>
-                    setFormData({ ...formData, originalUrl: e.target.value })
-                  }
+                  // value={formData.originalUrl}
+                  // onChange={(e) =>
+                  //   setFormData({ ...formData, originalUrl: e.target.value })
+                  // }
                   className="col-span-3"
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-title" className="text-right">
+                <Label htmlFor="edit-title" className="text-left">
                   Title
                 </Label>
                 <Input
                   id="edit-title"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
+                  // value={formData.title}
+                  // onChange={(e) =>
+                  //   setFormData({ ...formData, title: e.target.value })
+                  // }
                   className="col-span-3"
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-expiresAt" className="text-right">
+                <Label htmlFor="edit-expiresAt" className="text-left">
                   Expires At
                 </Label>
                 <Input
                   id="edit-expiresAt"
                   type="date"
-                  value={formData.expiresAt}
-                  onChange={(e) =>
-                    setFormData({ ...formData, expiresAt: e.target.value })
-                  }
+                  // value={formData.expiresAt}
+                  // onChange={(e) =>
+                  //   setFormData({ ...formData, expiresAt: e.target.value })
+                  // }
                   className="col-span-3"
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-isActive" className="text-right">
+                <Label htmlFor="edit-isActive" className="text-left">
                   Active
                 </Label>
                 <Switch
                   id="edit-isActive"
-                  checked={formData.isActive}
-                  onCheckedChange={(checked) =>
-                    setFormData({ ...formData, isActive: checked })
-                  }
+                  // checked={formData.isActive}
+                  // onCheckedChange={(checked) =>
+                  //   setFormData({ ...formData, isActive: checked })
+                  // }
                 />
               </div>
             </div>
