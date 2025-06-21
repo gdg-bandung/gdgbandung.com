@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Plus,
-  Edit,
-  Trash2,
-  ExternalLink,
-  Copy,
-  Search,
-  Filter,
-} from "lucide-react";
+import { Edit, Trash2, ExternalLink, Copy, Search, Filter } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { Input, InputWithLabel } from "~/components/ui/input";
+import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import {
   Card,
@@ -33,7 +25,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "~/components/ui/dialog";
 import { Badge } from "~/components/ui/badge";
 import {
@@ -44,31 +35,36 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
-import { QrCode, Download, User, LogOut, Settings } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
+import { QrCode, Download } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "~/lib/auth.server";
 import {
   redirect,
   useFetcher,
   useLoaderData,
-  useNavigate,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from "react-router";
-import { createUrl, getUrls } from "~/services/url";
-import type { Url, UrlWithoutCreatedAtUpdatedAt } from "~/type/url";
-import { urlForm } from "~/schemas/url";
+import {
+  actionCreateUrl,
+  actionDeleteUrl,
+  actionUpdateUrl,
+  getUrls,
+} from "~/services/url";
+import type { Url } from "~/type/url";
 import AddUrlModal from "~/components/management-system/add-url-modal";
 import LayoutMS from "~/components/management-system/layout";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
 
 const DOMAIN = "gdgbandung.com/";
 
@@ -107,48 +103,23 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const formData = await request.formData();
 
-  const shortCode = formData.get("shortCode");
-  const originalUrl = formData.get("originalUrl");
-  const title = formData.get("title");
-  const isActive = formData.get("isActive");
-  const expiresAt = formData.get("expiresAt");
-
-  const urlChecked = urlForm.safeParse({
-    shortCode,
-    originalUrl,
-    title,
-    isActive: isActive === "on",
-    expiresAt: expiresAt ? new Date(expiresAt as string) : undefined,
-  });
-
-  if (!urlChecked.success) {
-    const error = urlChecked.error.flatten().fieldErrors;
-    return {
-      acknowledge: false,
-      form: "create",
-      error,
-    };
+  switch (formData.get("actionType")) {
+    case "create":
+      return await actionCreateUrl(formData);
+    case "update":
+      return await actionUpdateUrl(formData);
+    case "delete":
+      return await actionDeleteUrl(formData);
+    default:
+      return {
+        acknowledge: false,
+        form: "",
+        error: true,
+      };
   }
-
-  const urlData: Omit<UrlWithoutCreatedAtUpdatedAt, "id"> = {
-    shortCode: urlChecked.data.shortCode,
-    originalUrl: urlChecked.data.originalUrl,
-    title: urlChecked.data.title,
-    isActive: urlChecked.data.isActive,
-    expiresAt: urlChecked.data.expiresAt,
-  };
-
-  await createUrl(urlData);
-
-  return {
-    acknowledge: true,
-    form: "create",
-    error: null,
-  };
 }
 
 export default function HomeMS() {
-  const navigate = useNavigate();
   const fetcher = useFetcher();
 
   const { user, response } = useLoaderData<typeof loader>();
@@ -162,11 +133,42 @@ export default function HomeMS() {
   const [selectedUrlForQR, setSelectedUrlForQR] = useState<Url | null>(null);
 
   useEffect(() => {
-    if (fetcher.data?.acknowledge && fetcher.data.form === "create") {
-      toast.success("URL Created", {
-        description: "Short URL has been created successfully.",
-      });
-      setIsCreateDialogOpen(false);
+    if (fetcher.data?.form === "create") {
+      if (fetcher.data.acknowledge) {
+        toast.success("URL Created", {
+          description: "Short URL has been created successfully.",
+        });
+        setIsCreateDialogOpen(false);
+      } else if (!fetcher.data.error) {
+        toast.error("URL Creation Failed", {
+          description: "Failed to create short URL.",
+        });
+      }
+    }
+
+    if (fetcher.data?.form === "update") {
+      if (fetcher.data.acknowledge) {
+        toast.success("URL Updated", {
+          description: "Short URL has been updated successfully.",
+        });
+        setIsEditDialogOpen(false);
+      } else if (!fetcher.data.error) {
+        toast.error("URL Update Failed", {
+          description: "Failed to update short URL.",
+        });
+      }
+    }
+
+    if (fetcher.data?.form === "delete") {
+      if (fetcher.data.acknowledge) {
+        toast.success("URL Deleted", {
+          description: "Short URL has been deleted successfully.",
+        });
+      } else if (!fetcher.data.error) {
+        toast.error("URL Delete Failed", {
+          description: "Failed to delete short URL.",
+        });
+      }
     }
   }, [fetcher.data]);
 
@@ -206,10 +208,7 @@ export default function HomeMS() {
   };
 
   const handleDelete = (id: string) => {
-    // setUrls(urls.filter((url) => url.id !== id));
-    toast.success("URL Deleted", {
-      description: "Short URL has been deleted successfully.",
-    });
+    fetcher.submit({ id, actionType: "delete" }, { method: "post" });
   };
 
   const copyToClipboard = (shortCode: string) => {
@@ -301,7 +300,11 @@ export default function HomeMS() {
                     Inactive URLs
                   </p>
                   <p className="text-3xl font-bold text-red-600">
-                    {urls.filter((url) => !url.isActive).length}
+                    {
+                      urls.filter(
+                        (url) => !url.isActive || url.expiresAt < new Date()
+                      ).length
+                    }
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -422,15 +425,45 @@ export default function HomeMS() {
                           >
                             <Edit className="w-4 h-4" />
                           </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDelete(url.id)}
-                            className="text-red-600 hover:text-red-700"
-                            title="Delete URL"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                          <AlertDialog>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              type="button"
+                              className="text-red-600 hover:text-red-700 cursor-pointer"
+                              title="Delete URL"
+                              asChild
+                            >
+                              <AlertDialogTrigger>
+                                <Trash2 className="w-4 h-4" />
+                              </AlertDialogTrigger>
+                            </Button>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  Are you absolutely sure?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will
+                                  permanently delete your account and remove
+                                  your data from our servers.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel
+                                  disabled={fetcher.state !== "idle"}
+                                >
+                                  Cancel
+                                </AlertDialogCancel>
+                                <AlertDialogAction
+                                  disabled={fetcher.state !== "idle"}
+                                  onClick={() => handleDelete(url.id)}
+                                >
+                                  Continue
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </div>
                       </TableCell>
                     </TableRow>

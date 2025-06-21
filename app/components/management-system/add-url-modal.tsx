@@ -26,7 +26,7 @@ export default function AddUrlModal({
   return (
     <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="bg-blue-600 hover:bg-blue-700 cursor-pointer">
           <Plus className="w-4 h-4 mr-2" />
           Create Short URL
         </Button>
@@ -40,6 +40,7 @@ export default function AddUrlModal({
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
+            <input className="hidden" name="actionType" value="create" />
             <InputWithLabel
               label="Short Code"
               name="shortCode"
