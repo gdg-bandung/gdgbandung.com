@@ -1,7 +1,7 @@
 import { url, urlForm } from "~/schemas/url";
 import { db } from "~/lib/database";
+import { and, eq, gte } from "drizzle-orm";
 import type { UrlWithoutCreatedAtUpdatedAt } from "~/type/url";
-import { eq } from "drizzle-orm";
 
 export async function getUrls() {
   try {
@@ -91,6 +91,37 @@ export async function deleteUrl(id: string) {
     console.error("Error deleting URL:", error);
     return {
       acknowledge: false,
+    };
+  }
+}
+
+export async function findOriginalUrl(shortCode: string) {
+  try {
+    const response = await db
+      .select()
+      .from(url)
+      .where(
+        and(
+          eq(url.shortCode, shortCode),
+          eq(url.isActive, true),
+          gte(url.expiresAt, new Date())
+        )
+      );
+    if (response.length > 0) {
+      return {
+        acknowledge: true,
+        data: response[0].originalUrl,
+      };
+    }
+    return {
+      acknowledge: false,
+      data: null,
+    };
+  } catch (error) {
+    console.error("Error finding original URL:", error);
+    return {
+      acknowledge: false,
+      data: null,
     };
   }
 }

@@ -1,12 +1,9 @@
 import { redirect } from "react-router";
-import { configRedirects } from "~/configs/redirect";
+import { findOriginalUrl } from "~/services/url";
 
-export function redirectRouteToURL(request: Request) {
+export async function redirectRouteToURL(request: Request) {
   const url = new URL(request.url);
-  const foundItem = configRedirects.find((item) => {
-    return item.path.trim() === url.pathname;
-  });
-
-  if (!foundItem) return null;
-  return redirect(foundItem?.url);
+  const foundItem = await findOriginalUrl(url.pathname.slice(1));
+  if (!foundItem.data) return null;
+  return redirect(foundItem.data);
 }
