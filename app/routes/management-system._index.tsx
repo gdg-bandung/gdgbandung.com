@@ -59,8 +59,13 @@ import UpdateUrlModal from "~/components/management-system/update-url-modal";
 import QrCodeModal from "~/components/management-system/qr-code-modal";
 import QRCode from "qrcode";
 import { DOMAIN } from "~/configs/domain";
+import { getFlagManagementSystem } from "~/utils/flag";
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  const flag = getFlagManagementSystem();
+  if (!flag) {
+    return redirect("/");
+  }
   const session = await auth.api.getSession({
     headers: request.headers,
   });

@@ -12,6 +12,14 @@ import { auth } from "~/lib/auth.server";
 import type { Route } from "./+types/_index";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { getFlagManagementSystem } from "~/utils/flag";
+
+export async function loader() {
+  const flag = getFlagManagementSystem();
+  if (!flag) {
+    return redirect("/");
+  }
+}
 
 export async function action({ request }: Route.ActionArgs) {
   try {
