@@ -1,5 +1,6 @@
 import { pgTable, text, timestamp, boolean, uuid } from "drizzle-orm/pg-core";
 import { z } from "zod";
+import { definedRoutes } from "~/configs/defined-routes";
 
 export const url = pgTable("url", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -15,7 +16,13 @@ export const url = pgTable("url", {
 export const urlForm = z.object({
   shortCode: z
     .string({ required_error: "Short code is required" })
-    .min(1, "Short code is required"),
+    .min(1, "Short code is required")
+    .refine((value) => value.match(/^[a-zA-Z0-9-]+$/), {
+      message: "Short code must contain only letters, numbers, and hyphens.",
+    })
+    .refine((value) => !definedRoutes.includes(value), {
+      message: "Short code already exists.",
+    }),
   originalUrl: z
     .string({ required_error: "Original URL is required" })
     .url()

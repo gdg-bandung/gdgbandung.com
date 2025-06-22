@@ -23,6 +23,18 @@ export async function createUrl(
   urlData: Omit<UrlWithoutCreatedAtUpdatedAt, "id">
 ) {
   try {
+    const urlChecked = await db
+      .select()
+      .from(url)
+      .where(eq(url.shortCode, urlData.shortCode));
+    if (urlChecked.length > 0) {
+      return {
+        acknowledge: false,
+        error: {
+          shortCode: ["Short code already exists."],
+        },
+      };
+    }
     await db.insert(url).values(urlData);
     return {
       acknowledge: true,
@@ -38,6 +50,19 @@ export async function createUrl(
 export async function updateUrl(urlData: UrlWithoutCreatedAtUpdatedAt) {
   try {
     const { id, ...data } = urlData;
+
+    const urlChecked = await db
+      .select()
+      .from(url)
+      .where(eq(url.shortCode, urlData.shortCode));
+    if (urlChecked.filter((item) => item.id !== id).length > 0) {
+      return {
+        acknowledge: false,
+        error: {
+          shortCode: ["Short code already exists."],
+        },
+      };
+    }
     await db
       .update(url)
       .set({
@@ -108,7 +133,7 @@ export async function actionCreateUrl(formData: FormData) {
   return {
     acknowledge: response.acknowledge,
     form: "create",
-    error: null,
+    error: response.error,
   };
 }
 
@@ -160,7 +185,7 @@ export async function actionUpdateUrl(formData: FormData) {
   return {
     acknowledge: response.acknowledge,
     form: "update",
-    error: null,
+    error: response.error,
   };
 }
 

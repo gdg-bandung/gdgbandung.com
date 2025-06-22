@@ -111,11 +111,17 @@ export async function action({ request }: ActionFunctionArgs) {
       return await actionUpdateUrl(formData);
     case "delete":
       return await actionDeleteUrl(formData);
+    case "reset":
+      return {
+        acknowledge: true,
+        form: "",
+        error: null,
+      };
     default:
       return {
         acknowledge: false,
         form: "",
-        error: true,
+        error: null,
       };
   }
 }
@@ -173,6 +179,11 @@ export default function HomeMS() {
       }
     }
   }, [fetcher.data]);
+
+  useEffect(() => {
+    // reset error
+    fetcher.submit({ actionType: "reset" }, { method: "post" });
+  }, [isCreateDialogOpen, isEditDialogOpen]);
 
   const handleEdit = (url: Url) => {
     setEditingUrl(url);
