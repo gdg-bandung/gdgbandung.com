@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Edit, Trash2, ExternalLink, Copy, Search, Filter } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 import {
   Card,
   CardContent,
@@ -18,14 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog";
 import { Badge } from "~/components/ui/badge";
 import {
   Select,
@@ -34,8 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { Switch } from "~/components/ui/switch";
-import { QrCode, Download } from "lucide-react";
+import { QrCode } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "~/lib/auth.server";
 import {
@@ -66,15 +56,9 @@ import {
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
 import UpdateUrlModal from "~/components/management-system/update-url-modal";
-
-const DOMAIN = "gdgbandung.com/";
-
-const generateQRCode = (text: string): string => {
-  // Using QR Server API for QR code generation
-  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-    text
-  )}`;
-};
+import QrCodeModal from "~/components/management-system/qr-code-modal";
+import QRCode from "qrcode";
+import { DOMAIN } from "~/configs/domain";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await auth.api.getSession({
@@ -138,6 +122,7 @@ export default function HomeMS() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
   const [selectedUrlForQR, setSelectedUrlForQR] = useState<Url | null>(null);
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [editingUrl, setEditingUrl] = useState<Url | null>(null);
 
   useEffect(() => {
@@ -215,22 +200,20 @@ export default function HomeMS() {
     return matchesSearch && matchesStatus;
   });
 
-  const showQRCode = (url: Url) => {
-    setSelectedUrlForQR(url);
-    setQrDialogOpen(true);
-  };
-
-  const downloadQRCode = (shortCode: string) => {
-    const qrUrl = generateQRCode(`https://${DOMAIN}${shortCode}`);
-    const link = document.createElement("a");
-    link.href = qrUrl;
-    link.download = `qr-${shortCode}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success("QR Code Downloaded", {
-      description: "QR code has been downloaded successfully.",
-    });
+  const showQRCode = async (url: Url) => {
+    try {
+      const qrCodeUrl = await QRCode.toDataURL(
+        `https://${DOMAIN}${url.shortCode}`
+      );
+      setQrCodeUrl(qrCodeUrl);
+      setSelectedUrlForQR(url);
+      setQrDialogOpen(true);
+    } catch (error) {
+      console.error("Error generating QR code:", error);
+      toast.error("Failed to generate QR code.", {
+        description: "Please try again later.",
+      });
+    }
   };
 
   return (
@@ -466,54 +449,12 @@ export default function HomeMS() {
         />
 
         {/* QR Code Dialog */}
-        <Dialog open={qrDialogOpen} onOpenChange={setQrDialogOpen}>
-          <DialogContent className="sm:max-w-[400px]">
-            <DialogHeader>
-              <DialogTitle>QR Code</DialogTitle>
-              <DialogDescription>
-                QR code for: {selectedUrlForQR?.title}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex flex-col items-center space-y-4 py-4">
-              {selectedUrlForQR && (
-                <>
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-200">
-                    <img
-                      src={generateQRCode(
-                        `https://${DOMAIN}${
-                          selectedUrlForQR.shortCode || "/placeholder.svg"
-                        }`
-                      )}
-                      alt={`QR Code for ${selectedUrlForQR.shortCode}`}
-                      className="w-48 h-48"
-                    />
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm text-gray-600 mb-2">Scan to visit:</p>
-                    <code className="bg-gray-100 px-3 py-1 rounded text-sm">
-                      https://{DOMAIN}
-                      {selectedUrlForQR.shortCode}
-                    </code>
-                  </div>
-                </>
-              )}
-            </div>
-            <DialogFooter className="flex justify-between">
-              <Button variant="outline" onClick={() => setQrDialogOpen(false)}>
-                Close
-              </Button>
-              <Button
-                onClick={() =>
-                  selectedUrlForQR && downloadQRCode(selectedUrlForQR.shortCode)
-                }
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download QR Code
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <QrCodeModal
+          qrDialogOpen={qrDialogOpen}
+          setQrDialogOpen={setQrDialogOpen}
+          selectedUrlForQR={selectedUrlForQR}
+          qrCodeUrl={qrCodeUrl}
+        />
       </main>
     </LayoutMS>
   );
