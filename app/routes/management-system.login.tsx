@@ -14,6 +14,15 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 import { getFlagManagementSystem } from "~/utils/flag";
 
+export const meta: Route.MetaFunction = () => {
+  return [
+    {
+      name: "robots",
+      content: "noindex, nofollow",
+    },
+  ];
+};
+
 export async function loader() {
   const flag = getFlagManagementSystem();
   if (!flag) {

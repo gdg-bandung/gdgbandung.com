@@ -68,6 +68,16 @@ import QrCodeModal from "~/components/management-system/qr-code-modal";
 import QRCode from "qrcode";
 import { DOMAIN } from "~/configs/domain";
 import { getFlagManagementSystem } from "~/utils/flag";
+import type { Route } from "./+types/management-system._index";
+
+export const meta: Route.MetaFunction = () => {
+  return [
+    {
+      name: "robots",
+      content: "noindex, nofollow",
+    },
+  ];
+};
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const flag = getFlagManagementSystem();
