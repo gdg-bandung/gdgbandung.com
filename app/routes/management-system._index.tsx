@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { Edit, Trash2, ExternalLink, Copy, Search, Filter } from "lucide-react";
+import {
+  Edit,
+  Trash2,
+  ExternalLink,
+  Copy,
+  Search,
+  Filter,
+  Clock,
+} from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -200,7 +208,8 @@ export default function HomeMS() {
     const matchesStatus =
       statusFilter === "all" ||
       (statusFilter === "active" && url.isActive) ||
-      (statusFilter === "inactive" && !url.isActive);
+      (statusFilter === "inactive" && !url.isActive) ||
+      (statusFilter === "expired" && url.expiresAt < new Date());
 
     return matchesSearch && matchesStatus;
   });
@@ -226,7 +235,7 @@ export default function HomeMS() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -271,15 +280,29 @@ export default function HomeMS() {
                     Inactive URLs
                   </p>
                   <p className="text-3xl font-bold text-red-600">
-                    {
-                      urls.filter(
-                        (url) => !url.isActive || url.expiresAt < new Date()
-                      ).length
-                    }
+                    {urls.filter((url) => !url.isActive).length}
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                   <Trash2 className="w-6 h-6 text-red-600" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">
+                    Expired URLs
+                  </p>
+                  <p className="text-3xl font-bold text-red-600">
+                    {urls.filter((url) => url.expiresAt < new Date()).length}
+                  </p>
+                </div>
+                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-red-600" />
                 </div>
               </div>
             </CardContent>
@@ -321,6 +344,7 @@ export default function HomeMS() {
                   <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="active">Active</SelectItem>
                   <SelectItem value="inactive">Inactive</SelectItem>
+                  <SelectItem value="expired">Expired</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -335,7 +359,7 @@ export default function HomeMS() {
                     <TableHead>Title</TableHead>
                     <TableHead>Original URL</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Created</TableHead>
+                    <TableHead>Expires Status</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -377,7 +401,17 @@ export default function HomeMS() {
                           {url.isActive ? "Active" : "Inactive"}
                         </Badge>
                       </TableCell>
-                      <TableCell>{url.createdAt.toISOString()}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            url.expiresAt < new Date()
+                              ? "destructive"
+                              : "default"
+                          }
+                        >
+                          {url.expiresAt < new Date() ? "Expired" : "Active"}
+                        </Badge>
+                      </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
                           <Button
