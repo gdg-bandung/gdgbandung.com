@@ -65,6 +65,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
+import UpdateUrlModal from "~/components/management-system/update-url-modal";
 
 const DOMAIN = "gdgbandung.com/";
 
@@ -131,6 +132,7 @@ export default function HomeMS() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
   const [selectedUrlForQR, setSelectedUrlForQR] = useState<Url | null>(null);
+  const [editingUrl, setEditingUrl] = useState<Url | null>(null);
 
   useEffect(() => {
     if (fetcher.data?.form === "create") {
@@ -173,38 +175,8 @@ export default function HomeMS() {
   }, [fetcher.data]);
 
   const handleEdit = (url: Url) => {
-    // setEditingUrl(url);
-    // setFormData({
-    //   shortCode: url.shortCode,
-    //   originalUrl: url.originalUrl,
-    //   title: url.title,
-    //   expiresAt: url.expiresAt,
-    //   isActive: url.isActive,
-    // });
-    // setIsEditDialogOpen(true);
-  };
-
-  const handleUpdate = () => {
-    // if (!editingUrl) return;
-    // const updatedUrls = urls.map((url) =>
-    //   url.id === editingUrl.id
-    //     ? {
-    //         ...url,
-    //         shortCode: formData.shortCode,
-    //         originalUrl: formData.originalUrl,
-    //         title: formData.title,
-    //         expiresAt: formData.expiresAt || undefined,
-    //         isActive: formData.isActive,
-    //       }
-    //     : url
-    // );
-    // // setUrls(updatedUrls);
-    // setIsEditDialogOpen(false);
-    // setEditingUrl(null);
-    // resetForm();
-    // toast.success("URL Updated", {
-    //   description: "Short URL has been updated successfully.",
-    // });
+    setEditingUrl(url);
+    setIsEditDialogOpen(true);
   };
 
   const handleDelete = (id: string) => {
@@ -475,97 +447,12 @@ export default function HomeMS() {
         </Card>
 
         {/* Edit Dialog */}
-        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-          <DialogContent className="sm:max-w-[600px]">
-            <DialogHeader>
-              <DialogTitle>Edit Short URL</DialogTitle>
-              <DialogDescription>
-                Update the details of your shortened URL
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-shortCode" className="text-left">
-                  Short Code
-                </Label>
-                <Input
-                  id="edit-shortCode"
-                  // value={formData.shortCode}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, shortCode: e.target.value })
-                  // }
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-originalUrl" className="text-left">
-                  Original URL
-                </Label>
-                <Input
-                  id="edit-originalUrl"
-                  // value={formData.originalUrl}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, originalUrl: e.target.value })
-                  // }
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-title" className="text-left">
-                  Title
-                </Label>
-                <Input
-                  id="edit-title"
-                  // value={formData.title}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, title: e.target.value })
-                  // }
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-expiresAt" className="text-left">
-                  Expires At
-                </Label>
-                <Input
-                  id="edit-expiresAt"
-                  type="date"
-                  // value={formData.expiresAt}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, expiresAt: e.target.value })
-                  // }
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-isActive" className="text-left">
-                  Active
-                </Label>
-                <Switch
-                  id="edit-isActive"
-                  // checked={formData.isActive}
-                  // onCheckedChange={(checked) =>
-                  //   setFormData({ ...formData, isActive: checked })
-                  // }
-                />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setIsEditDialogOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleUpdate}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                Update URL
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <UpdateUrlModal
+          isEditDialogOpen={isEditDialogOpen}
+          setIsEditDialogOpen={setIsEditDialogOpen}
+          editingUrl={editingUrl}
+          fetcher={fetcher}
+        />
 
         {/* QR Code Dialog */}
         <Dialog open={qrDialogOpen} onOpenChange={setQrDialogOpen}>

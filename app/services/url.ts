@@ -37,13 +37,14 @@ export async function createUrl(
 
 export async function updateUrl(urlData: UrlWithoutCreatedAtUpdatedAt) {
   try {
+    const { id, ...data } = urlData;
     await db
       .update(url)
       .set({
-        ...urlData,
+        ...data,
         updatedAt: new Date(),
       })
-      .where(eq(url.id, urlData.id));
+      .where(eq(url.id, id));
     return {
       acknowledge: true,
     };
