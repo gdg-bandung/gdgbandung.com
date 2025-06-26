@@ -95,6 +95,32 @@ export async function deleteUrl(id: string) {
   }
 }
 
+export async function findUrlById(id: string) {
+  try {
+    const response = await db
+      .select()
+      .from(url)
+      .where(eq(url.id, id));
+    
+    if (response.length > 0) {
+      return {
+        acknowledge: true,
+        data: response[0],
+      };
+    }
+    return {
+      acknowledge: false,
+      data: null,
+    };
+  } catch (error) {
+    console.error("Error finding URL by ID:", error);
+    return {
+      acknowledge: false,
+      data: null,
+    };
+  }
+}
+
 export async function findOriginalUrl(shortCode: string) {
   try {
     const response = await db

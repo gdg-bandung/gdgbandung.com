@@ -7,6 +7,7 @@ import {
   Search,
   Filter,
   Clock,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -37,6 +38,7 @@ import { QrCode } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "~/lib/auth.server";
 import {
+  Link,
   redirect,
   useFetcher,
   useLoaderData,
@@ -424,6 +426,16 @@ export default function HomeMS() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
+                          <Button
+                            asChild
+                            variant="ghost"
+                            size="sm"
+                            title="Analytics"
+                          >
+                            <Link to={`/management-system/analytics/${url.id}`}>
+                              <BarChart3 className="w-4 h-4" />
+                            </Link>
+                          </Button>
                           <Button
                             variant="ghost"
                             size="sm"
