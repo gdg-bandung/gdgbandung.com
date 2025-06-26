@@ -111,17 +111,20 @@ export async function findOriginalUrl(shortCode: string) {
       return {
         acknowledge: true,
         data: response[0].originalUrl,
+        urlData: response[0], // Include full URL data for analytics
       };
     }
     return {
       acknowledge: false,
       data: null,
+      urlData: null,
     };
   } catch (error) {
     console.error("Error finding original URL:", error);
     return {
       acknowledge: false,
       data: null,
+      urlData: null,
     };
   }
 }

@@ -1,17 +1,69 @@
-import { pgTable, text, timestamp, boolean, uuid } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  timestamp,
+  boolean,
+  uuid,
+  index,
+} from "drizzle-orm/pg-core";
 import { z } from "zod";
 import { definedRoutes } from "~/configs/defined-routes";
+import { relations } from "drizzle-orm";
 
-export const url = pgTable("url", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  shortCode: text("short_code").notNull().unique(),
-  originalUrl: text("original_url").notNull(),
-  title: text("title").notNull(),
-  isActive: boolean("is_active").notNull().default(true),
-  expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-});
+export const url = pgTable(
+  "url",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    shortCode: text("short_code").notNull().unique(),
+    originalUrl: text("original_url").notNull(),
+    title: text("title").notNull(),
+    isActive: boolean("is_active").notNull().default(true),
+    expiresAt: timestamp("expires_at").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => [
+    index("url_short_code_idx").on(table.shortCode),
+    index("url_is_active_idx").on(table.isActive),
+    index("url_expires_at_idx").on(table.expiresAt),
+  ]
+);
+
+// URL Analytics table for tracking clicks and visits
+export const urlAnalytics = pgTable(
+  "url_analytics",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    urlId: uuid("url_id")
+      .notNull()
+      .references(() => url.id, { onDelete: "cascade" }),
+    visitedAt: timestamp("visited_at").notNull().defaultNow(),
+    userAgent: text("user_agent"),
+    referrer: text("referrer"),
+    ipAddress: text("ip_address"),
+    country: text("country"),
+    city: text("city"),
+    device: text("device"), // mobile, desktop, tablet
+    browser: text("browser"), // chrome, firefox, safari, etc.
+    os: text("os"), // windows, macos, linux, android, ios
+  },
+  (table) => [
+    index("url_analytics_url_id_idx").on(table.urlId),
+    index("url_analytics_visited_at_idx").on(table.visitedAt),
+  ]
+);
+
+// Relations
+export const urlRelations = relations(url, ({ many }) => ({
+  analytics: many(urlAnalytics),
+}));
+
+export const urlAnalyticsRelations = relations(urlAnalytics, ({ one }) => ({
+  url: one(url, {
+    fields: [urlAnalytics.urlId],
+    references: [url.id],
+  }),
+}));
 
 export const urlForm = z.object({
   shortCode: z
