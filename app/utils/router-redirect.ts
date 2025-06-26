@@ -28,9 +28,6 @@ export async function redirectRouteToURL(request: Request) {
         device,
         browser,
         os,
-        // Note: country and city would need external service like MaxMind GeoIP
-        country: null,
-        city: null,
       });
     }
     

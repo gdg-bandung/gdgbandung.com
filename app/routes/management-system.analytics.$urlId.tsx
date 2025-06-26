@@ -420,39 +420,6 @@ export default function AnalyticsPage() {
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Countries */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Top Countries</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {analyticsData.topCountries.length > 0 ? (
-                      analyticsData.topCountries.map((country, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between p-3 border rounded-lg"
-                        >
-                          <div className="flex items-center gap-3">
-                            <Globe className="w-5 h-5 text-gray-500" />
-                            <span className="font-medium">
-                              {country.country}
-                            </span>
-                          </div>
-                          <Badge variant="secondary">
-                            {country.count} clicks
-                          </Badge>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-gray-500 text-center py-4">
-                        No country data available
-                      </p>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </TabsContent>
 
@@ -474,7 +441,6 @@ export default function AnalyticsPage() {
                           <TableHead>Referrer</TableHead>
                           <TableHead>Device</TableHead>
                           <TableHead>Browser</TableHead>
-                          <TableHead>Country</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -514,11 +480,6 @@ export default function AnalyticsPage() {
                                   {visit.browser || "Unknown"}
                                 </span>
                               </div>
-                            </TableCell>
-                            <TableCell>
-                              <span className="text-sm">
-                                {visit.country || "Unknown"}
-                              </span>
                             </TableCell>
                           </TableRow>
                         ))}

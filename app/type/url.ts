@@ -20,7 +20,6 @@ export type UrlAnalyticsSummary = {
   clicksThisWeek: number;
   clicksThisMonth: number;
   topReferrers: { referrer: string; count: number }[];
-  topCountries: { country: string; count: number }[];
   deviceBreakdown: { device: string; count: number }[];
   browserBreakdown: { browser: string; count: number }[];
 };

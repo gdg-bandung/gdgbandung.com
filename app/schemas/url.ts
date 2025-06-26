@@ -41,8 +41,6 @@ export const urlAnalytics = pgTable(
     userAgent: text("user_agent"),
     referrer: text("referrer"),
     ipAddress: text("ip_address"),
-    country: text("country"),
-    city: text("city"),
     device: text("device"), // mobile, desktop, tablet
     browser: text("browser"), // chrome, firefox, safari, etc.
     os: text("os"), // windows, macos, linux, android, ios

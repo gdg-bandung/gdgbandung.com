@@ -67,17 +67,6 @@ export async function getUrlAnalyticsSummary(urlId: string): Promise<UrlAnalytic
     .orderBy(desc(count()))
     .limit(10);
 
-  // Top countries
-  const topCountriesResult = await db
-    .select({
-      country: urlAnalytics.country,
-      count: count(),
-    })
-    .from(urlAnalytics)
-    .where(eq(urlAnalytics.urlId, urlId))
-    .groupBy(urlAnalytics.country)
-    .orderBy(desc(count()))
-    .limit(10);
 
   // Device breakdown
   const deviceBreakdownResult = await db
@@ -111,12 +100,6 @@ export async function getUrlAnalyticsSummary(urlId: string): Promise<UrlAnalytic
       referrer: r.referrer || "Direct",
       count: r.count,
     })),
-    topCountries: topCountriesResult
-      .filter(c => c.country)
-      .map(c => ({
-        country: c.country!,
-        count: c.count,
-      })),
     deviceBreakdown: deviceBreakdownResult
       .filter(d => d.device)
       .map(d => ({
