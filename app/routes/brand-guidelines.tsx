@@ -538,17 +538,8 @@ export default function BrandGuidelines() {
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-gray-700 leading-relaxed">
-                Do not modify the logo in any way, including cropping it or
-                removing the JetBrains brand name from the logo.
-                <br />
-                Do not distort or recolor the logo.
-                <br />
-                It is also not permitted to use versions of the logo not
-                provided on this page, add any effects to the logo, or rewrite
-                the text part.
-                <br />
-                Use only the images you downloaded on this page without making
-                any changes to them.
+                Follow these guidelines to ensure proper use of the GDG logo and
+                maintain brand integrity.
               </p>
 
               <div>
