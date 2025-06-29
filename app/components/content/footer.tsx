@@ -8,6 +8,7 @@ interface ContentFooterProps {
   link: {
     label: string;
     href: string;
+    target?: string;
   };
 }
 
@@ -21,14 +22,16 @@ export default function ContentFooter({
       <div className="text-center space-y-4">
         <p className="text-sm text-gray-500">{description}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" className="cursor-pointer">
             <Link to="/">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Link>
           </Button>
-          <Button key={link.href} asChild>
-            <Link to={link.href}>{link.label}</Link>
+          <Button key={link.href} asChild className="cursor-pointer">
+            <Link to={link.href} target={link.target}>
+              {link.label}
+            </Link>
           </Button>
         </div>
       </div>
