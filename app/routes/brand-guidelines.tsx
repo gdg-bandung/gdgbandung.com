@@ -109,15 +109,6 @@ export default function BrandGuidelines() {
                     Download Logo Assets
                   </Link>
                 </Button>
-                <Button variant="outline" asChild>
-                  <Link
-                    to="https://docs.google.com/presentation/d/1fEYiMVn_ojk8qVf1mHgo2spfxxaERRpgkRIOOUcXUXs/edit?slide=id.g32448cc644b_2_258#slide=id.g32448cc644b_2_258"
-                    target="_blank"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Official GDG Guidelines
-                  </Link>
-                </Button>
               </div>
             </CardContent>
           </Card>
@@ -522,8 +513,8 @@ export default function BrandGuidelines() {
             standards. Please check this page for updates and download the most
             recent logo files from our official repository."
           link={{
-            href: "https://docs.google.com/presentation/d/1fEYiMVn_ojk8qVf1mHgo2spfxxaERRpgkRIOOUcXUXs/edit?slide=id.g32448cc644b_2_258#slide=id.g32448cc644b_2_258",
-            label: "Official Google Developer Groups Brand Guidelines",
+            href: "https://drive.google.com/drive/folders/18gLkNtD2M72VL7yuRvVFpAgW7yQIiWTD",
+            label: "Download Logo Assets",
             target: "_blank",
           }}
         />
