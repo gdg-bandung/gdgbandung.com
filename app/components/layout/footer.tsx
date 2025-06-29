@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Join Community Button */}
           <div className="text-center md:text-right">
             <p className="font-semibold text-white mb-2">
-              Google Developer Group
+              Google Developer Group Bandung
             </p>
             <div className="space-y-2 mb-6">
               <div>
