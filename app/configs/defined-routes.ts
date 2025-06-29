@@ -4,4 +4,5 @@ export const definedRoutes = [
   "api",
   "code-of-conduct",
   "terms-and-conditions",
+  "brand-guidelines",
 ];

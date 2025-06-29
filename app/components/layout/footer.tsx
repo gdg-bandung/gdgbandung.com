@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Join Community Button */}
           <div className="text-center md:text-right">
             <p className="font-semibold text-white mb-2">
-              Google Developer Group
+              Google Developer Group Bandung
             </p>
             <div className="space-y-2 mb-6">
               <div>
@@ -86,6 +86,14 @@ export default function Footer() {
                   className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
                 >
                   Request for Media Partner
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to="/brand-guidelines"
+                  className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
+                >
+                  Brand Guidelines
                 </Link>
               </div>
             </div>
