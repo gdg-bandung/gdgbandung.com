@@ -5,6 +5,8 @@ import {
   ImageIcon,
   ExternalLink,
   Copy,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -68,6 +70,32 @@ export default function BrandGuidelines() {
   const grayscaleColors = [
     { name: "Off White", hex: "#f0f0f0", rgb: "240, 240, 240" },
     { name: "Black 02", hex: "#1e1e1e", rgb: "30, 30, 30" },
+  ];
+
+  const usageRules = [
+    {
+      type: "don't",
+      title: "Don't modify the logo in any way",
+      description:
+        "Do not modify the logo in any way, including cropping it or removing the GDG brand name from the logo.",
+    },
+    {
+      type: "don't",
+      title: "Don't distort or recolor the logo",
+      description: "Do not distort or recolor the logo.",
+    },
+    {
+      type: "don't",
+      title: "Don't use unauthorized versions",
+      description:
+        "It is also not permitted to use versions of the logo not provided on this page, add any effects to the logo, or rewrite the text part.",
+    },
+    {
+      type: "don't",
+      title: "Use only provided images",
+      description:
+        "Use only the images you downloaded on this page without making any changes to them.",
+    },
   ];
 
   return (
@@ -500,6 +528,45 @@ export default function BrandGuidelines() {
                     clipboard
                   </li>
                 </ul>
+              </div>
+            </CardContent>
+          </Card>
+          {/* Usage Guidelines */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <XCircle className="h-5 w-5 text-gdg-red" />
+                Logo Usage Guidelines
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-gray-700 leading-relaxed">
+                Follow these guidelines to ensure proper use of the GDG logo and
+                maintain brand integrity.
+              </p>
+
+              <div>
+                <h4 className="font-semibold text-gdg-red mb-4 flex items-center gap-2">
+                  <XCircle className="h-5 w-5" />
+                  Don'ts
+                </h4>
+                <div className="space-y-4">
+                  {usageRules
+                    .filter((rule) => rule.type === "don't")
+                    .map((rule, index) => (
+                      <div
+                        key={index}
+                        className="border-l-4 border-gdg-red pl-4"
+                      >
+                        <h5 className="font-medium text-gray-900 mb-1">
+                          {rule.title}
+                        </h5>
+                        <p className="text-sm text-gray-600">
+                          {rule.description}
+                        </p>
+                      </div>
+                    ))}
+                </div>
               </div>
             </CardContent>
           </Card>
