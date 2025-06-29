@@ -75,26 +75,23 @@ export default function BrandGuidelines() {
   const usageRules = [
     {
       type: "don't",
-      title: "Don't modify the logo in any way",
-      description:
-        "Do not modify the logo in any way, including cropping it or removing the GDG brand name from the logo.",
+      title: "Do not change the colors and shape.",
+      image: "/brand-guidelines/dont/change-color-and-shape.png",
     },
     {
       type: "don't",
-      title: "Don't distort or recolor the logo",
-      description: "Do not distort or recolor the logo.",
+      title: "Do not recolor the secondary logo for light-colored backgrounds.",
+      image: "/brand-guidelines/dont/recolor-secondary-logo.png",
     },
     {
       type: "don't",
-      title: "Don't use unauthorized versions",
-      description:
-        "It is also not permitted to use versions of the logo not provided on this page, add any effects to the logo, or rewrite the text part.",
+      title: "Do not apply any effects.",
+      image: "/brand-guidelines/dont/apply-effects.png",
     },
     {
       type: "don't",
-      title: "Use only provided images",
-      description:
-        "Use only the images you downloaded on this page without making any changes to them.",
+      title: "Do not use a different font.",
+      image: "/brand-guidelines/dont/use-different-font.png",
     },
   ];
 
@@ -535,14 +532,23 @@ export default function BrandGuidelines() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <XCircle className="h-5 w-5 text-gdg-red" />
+                <CheckCircle className="h-5 w-5 text-gdg-green" />
                 Logo Usage Guidelines
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-gray-700 leading-relaxed">
-                Follow these guidelines to ensure proper use of the GDG logo and
-                maintain brand integrity.
+                Do not modify the logo in any way, including cropping it or
+                removing the JetBrains brand name from the logo.
+                <br />
+                Do not distort or recolor the logo.
+                <br />
+                It is also not permitted to use versions of the logo not
+                provided on this page, add any effects to the logo, or rewrite
+                the text part.
+                <br />
+                Use only the images you downloaded on this page without making
+                any changes to them.
               </p>
 
               <div>
@@ -550,20 +556,28 @@ export default function BrandGuidelines() {
                   <XCircle className="h-5 w-5" />
                   Don'ts
                 </h4>
-                <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-8">
                   {usageRules
                     .filter((rule) => rule.type === "don't")
                     .map((rule, index) => (
-                      <div
-                        key={index}
-                        className="border-l-4 border-gdg-red pl-4"
-                      >
-                        <h5 className="font-medium text-gray-900 mb-1">
-                          {rule.title}
-                        </h5>
-                        <p className="text-sm text-gray-600">
-                          {rule.description}
-                        </p>
+                      <div className="space-y-4" key={index}>
+                        <div className="bg-gray-100 rounded-lg p-8 flex items-center justify-center min-h-[120px]">
+                          <img
+                            src={rule.image}
+                            alt={rule.title}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="bg-gdg-red rounded-full p-1">
+                            <XCircle className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <h5 className="font-medium text-gray-900">
+                              {rule.title}
+                            </h5>
+                          </div>
+                        </div>
                       </div>
                     ))}
                 </div>
