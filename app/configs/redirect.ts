@@ -34,11 +34,11 @@ export const configRedirects = [
     url: "https://drive.google.com/drive/folders/14Perdt75vy9TA-iXb7pPyeSJy0UuNkg_?hl=ID"
   },
   {
-    path: "cfs-devfest2025",
+    path: "/cfs-devfest2025",
     url: "https://sessionize.com/devfest-gdg-bandung-2025/"
   },
   {
-    path: "devfest",
+    path: "/devfest",
     url: "https://gdg.community.dev/events/details/google-gdg-bandung-presents-devfest-bandung-2025-the-biggest-developer-festival-in-indonesia/"
   }
 ];
