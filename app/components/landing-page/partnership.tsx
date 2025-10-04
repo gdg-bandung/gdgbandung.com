@@ -110,7 +110,7 @@ export default function Partnership() {
             work together to create meaningful impact.
           </p>
           <a
-            href="https://gdgbandung.com/contact"
+            href="https://gdgbandung.com/sponsorship"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block cursor-pointer"
