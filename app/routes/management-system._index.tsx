@@ -229,9 +229,58 @@ export default function HomeMS() {
   const showQRCode = async (url: Url) => {
     try {
       const qrCodeUrl = await QRCode.toDataURL(
-        `https://${DOMAIN}${url.shortCode}`
+        `https://${DOMAIN}${url.shortCode}`,
+        {
+          width: 256,
+          margin: 2,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF'
+          },
+          errorCorrectionLevel: 'M'
+        }
       );
-      setQrCodeUrl(qrCodeUrl);
+      
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const qrImage = new Image();
+      const logoImage = new Image();
+      
+      await new Promise<void>((resolve, reject) => {
+        qrImage.onload = () => {
+          canvas.width = qrImage.width;
+          canvas.height = qrImage.height;
+          ctx?.drawImage(qrImage, 0, 0);
+          
+          logoImage.onload = () => {
+            const logoSize = qrImage.width * 0.2;
+            const logoX = (qrImage.width - logoSize) / 2;
+            const logoY = (qrImage.height - logoSize) / 2;
+            
+            if (ctx) {
+              const padding = 4;
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(logoX - padding, logoY - padding, logoSize + (padding * 2), logoSize + (padding * 2));
+              
+              ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
+            }
+            
+            resolve();
+          };
+          
+          logoImage.onerror = () => {
+            resolve();
+          };
+          
+          logoImage.src = '/logo.svg';
+        };
+        
+        qrImage.onerror = () => reject(new Error('Failed to load QR code'));
+        qrImage.src = qrCodeUrl;
+      });
+      
+      const finalQrCodeUrl = canvas.toDataURL();
+      setQrCodeUrl(finalQrCodeUrl);
       setSelectedUrlForQR(url);
       setQrDialogOpen(true);
     } catch (error) {
