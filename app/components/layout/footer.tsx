@@ -1,14 +1,4 @@
-import {
-  Instagram,
-  Youtube,
-  Facebook,
-  Mail,
-  MessageCircle,
-  Send,
-  Linkedin,
-  Twitter,
-  Users,
-} from "lucide-react";
+import { Users } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router";
 import { CHANNEL, SOCIAL_MEDIA } from "~/data/footer";
@@ -94,6 +84,14 @@ export default function Footer() {
                   className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
                 >
                   Brand Guidelines
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to="/payment-policy"
+                  className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
+                >
+                  Payment Policy
                 </Link>
               </div>
             </div>

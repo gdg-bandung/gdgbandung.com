@@ -1,14 +1,5 @@
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import ContentHeader from "~/components/content/header";
-import {
-  AlertTriangle,
-  Handshake,
-  Mail,
-  Shield,
-  Target,
-  Users,
-} from "lucide-react";
 import ContentFooter from "~/components/content/footer";
 
 export default function TermsAndConditions() {
@@ -388,7 +379,7 @@ export default function TermsAndConditions() {
         <ContentFooter
           description="By proceeding with media partnership activities, you acknowledge that you have read, understood, and agree
             to these Terms and Conditions."
-          link={{ label: "View Code of Conduct", href: "/code-of-conduct" }}
+          link={{ label: "View Payment Policy", href: "/payment-policy" }}
         />
       </div>
     </div>
