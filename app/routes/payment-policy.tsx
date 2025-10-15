@@ -174,6 +174,36 @@ export default function TermsAndConditions() {
             <CardContent className="space-y-4">
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li>
+                  Once payment is successfully completed and the product or
+                  service has been delivered,{" "}
+                  <strong>payments are non-refundable</strong>.
+                </li>
+                <li>
+                  Refunds are only applicable if an error or cancellation occurs
+                  on the part of GDG Bandung.
+                </li>
+                <li>
+                  Refund requests can be made via our official contact or email
+                  and will be reviewed accordingly.
+                </li>
+                <li>
+                  Refunds will be processed after verification and may be
+                  subject to administrative or transaction fees.
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Security & Disclaimer */}
+          <Card className="gap-2">
+            <CardHeader>
+              <CardTitle className="font-semibold text-xl">
+                7. Security & Disclaimer
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>
                   All transactions are handled securely through iPaymu's system,
                   which complies with industry-standard security practices.
                 </li>
@@ -194,7 +224,7 @@ export default function TermsAndConditions() {
           <Card className="gap-2">
             <CardHeader>
               <CardTitle className="font-semibold text-xl">
-                Policy Updates
+                8. Policy Updates
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
