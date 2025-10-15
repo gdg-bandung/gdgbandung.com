@@ -5,16 +5,16 @@ import { ArrowLeft } from "lucide-react";
 
 interface ContentFooterProps {
   description: string;
-  link: {
+  links: {
     label: string;
     href: string;
     target?: string;
-  };
+  }[];
 }
 
 export default function ContentFooter({
   description,
-  link,
+  links,
 }: ContentFooterProps) {
   return (
     <>
@@ -28,11 +28,13 @@ export default function ContentFooter({
               Back to Home
             </Link>
           </Button>
-          <Button key={link.href} asChild className="cursor-pointer">
-            <Link to={link.href} target={link.target}>
-              {link.label}
-            </Link>
-          </Button>
+          {links.map((link) => (
+            <Button key={link.href} asChild className="cursor-pointer">
+              <Link to={link.href} target={link.target}>
+                {link.label}
+              </Link>
+            </Button>
+          ))}
         </div>
       </div>
     </>

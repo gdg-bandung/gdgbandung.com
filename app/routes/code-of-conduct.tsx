@@ -178,10 +178,13 @@ export default function CodeOfConduct() {
 
         <ContentFooter
           description="By participating in GDG Bandung activities, you agree to abide by this Code of Conduct."
-          link={{
-            label: "View Terms and Conditions",
-            href: "/terms-and-conditions",
-          }}
+          links={[
+            {
+              label: "View Terms and Conditions",
+              href: "/terms-and-conditions",
+            },
+            { label: "View Payment Policy", href: "/payment-policy" },
+          ]}
         />
       </div>
     </div>

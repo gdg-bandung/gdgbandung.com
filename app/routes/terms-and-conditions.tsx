@@ -379,7 +379,10 @@ export default function TermsAndConditions() {
         <ContentFooter
           description="By proceeding with media partnership activities, you acknowledge that you have read, understood, and agree
             to these Terms and Conditions."
-          link={{ label: "View Payment Policy", href: "/payment-policy" }}
+          links={[
+            { label: "View Code of Conduct", href: "/code-of-conduct" },
+            { label: "View Payment Policy", href: "/payment-policy" },
+          ]}
         />
       </div>
     </div>

@@ -244,7 +244,13 @@ export default function TermsAndConditions() {
 
         <ContentFooter
           description="By making a payment, you agree to the terms outlined in this Payment Policy and acknowledge that all transactions are processed securely."
-          link={{ label: "View Code of Conduct", href: "/code-of-conduct" }}
+          links={[
+            {
+              label: "View Terms and Conditions",
+              href: "/terms-and-conditions",
+            },
+            { label: "View Code of Conduct", href: "/code-of-conduct" },
+          ]}
         />
       </div>
     </div>

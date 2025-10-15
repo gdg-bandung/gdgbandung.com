@@ -584,11 +584,13 @@ export default function BrandGuidelines() {
           description="These brand guidelines are based on official Google Developer Groups
             standards. Please check this page for updates and download the most
             recent logo files from our official repository."
-          link={{
-            href: "https://drive.google.com/drive/folders/18gLkNtD2M72VL7yuRvVFpAgW7yQIiWTD",
-            label: "Download Logo Assets",
-            target: "_blank",
-          }}
+          links={[
+            {
+              href: "https://drive.google.com/drive/folders/18gLkNtD2M72VL7yuRvVFpAgW7yQIiWTD",
+              label: "Download Logo Assets",
+              target: "_blank",
+            },
+          ]}
         />
       </div>
     </div>
