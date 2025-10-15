@@ -240,6 +240,24 @@ export default function TermsAndConditions() {
               </ul>
             </CardContent>
           </Card>
+
+          {/* Contact Support */}
+          <Card className="gap-2">
+            <CardHeader>
+              <CardTitle className="font-semibold text-xl">
+                9. Contact Support
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-gray-700 leading-relaxed">
+                For payment inquiries, refund requests, or assistance, please
+                contact our support team:
+                <br />
+                <strong>Email:</strong>{" "}
+                <a href="mailto:hi@gdgbandung.com" className="text-gdg-blue">hi@gdgbandung.com</a>
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         <ContentFooter
