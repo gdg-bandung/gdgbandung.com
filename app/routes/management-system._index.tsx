@@ -231,7 +231,7 @@ export default function HomeMS() {
       const qrCodeUrl = await QRCode.toDataURL(
         `https://${DOMAIN}${url.shortCode}`,
         {
-          width: 256,
+          width: 1024, // Increased from 256 to 1024 for HD quality
           margin: 2,
           color: {
             dark: '#000000',
@@ -241,19 +241,33 @@ export default function HomeMS() {
         }
       );
       
+      // Create high-resolution canvas to add logo
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const qrImage = new Image();
       const logoImage = new Image();
       
+      // Enable high-quality rendering
+      if (ctx) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+      }
+      
       await new Promise<void>((resolve, reject) => {
         qrImage.onload = () => {
-          canvas.width = qrImage.width;
-          canvas.height = qrImage.height;
-          ctx?.drawImage(qrImage, 0, 0);
+          // Set high-resolution canvas size
+          const scale = window.devicePixelRatio || 1;
+          canvas.width = qrImage.width * scale;
+          canvas.height = qrImage.height * scale;
+          
+          // Scale the context for high DPI displays
+          if (ctx) {
+            ctx.scale(scale, scale);
+            ctx.drawImage(qrImage, 0, 0, qrImage.width, qrImage.height);
+          }
           
           logoImage.onload = () => {
-            const logoSize = qrImage.width * 0.2;
+            const logoSize = qrImage.width * 0.2; // Logo size is 20% of QR code
             const logoX = (qrImage.width - logoSize) / 2;
             const logoY = (qrImage.height - logoSize) / 2;
             
@@ -279,7 +293,7 @@ export default function HomeMS() {
         qrImage.src = qrCodeUrl;
       });
       
-      const finalQrCodeUrl = canvas.toDataURL();
+      const finalQrCodeUrl = canvas.toDataURL('image/png', 1.0); // Maximum quality PNG
       setQrCodeUrl(finalQrCodeUrl);
       setSelectedUrlForQR(url);
       setQrDialogOpen(true);
