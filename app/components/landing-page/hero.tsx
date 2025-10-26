@@ -52,16 +52,16 @@ export default function Hero() {
         </div>
 
         {/* Statistics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 bg-white p-8 rounded-xl shadow-md">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-16 bg-white p-8 rounded-xl shadow-md">
           <div className="text-center flex flex-col items-center">
             <img src="/favicon.svg" alt="Members" className="h-16 -m-3.5" />
-            <p className="text-3xl font-bold text-gdg-blue">4K++</p>
+            <p className="text-3xl font-bold text-gdg-blue">6K++</p>
             <p className="text-gray-600">Community Members</p>
           </div>
           <div className="text-center flex flex-col items-center">
             <img
               src="/social-media/youtube.svg"
-              alt="Members"
+              alt="Youtube Icon"
               className="h-8 m-0.5"
             />
             <p className="text-3xl font-bold text-gdg-red">500++</p>
@@ -70,7 +70,7 @@ export default function Hero() {
           <div className="text-center flex flex-col items-center">
             <img
               src="/social-media/linkedin.svg"
-              alt="Members"
+              alt="Linkedin Icon"
               className="h-8 m-0.5"
             />
             <p className="text-3xl font-bold text-gdg-yellow">1K++</p>
@@ -79,11 +79,20 @@ export default function Hero() {
           <div className="text-center flex flex-col items-center">
             <img
               src="/social-media/instagram.svg"
-              alt="Members"
+              alt="Instagram Icon"
               className="h-8 m-0.5"
             />
-            <p className="text-3xl font-bold text-gdg-green">7K++</p>
+            <p className="text-3xl font-bold text-gdg-green">8K++</p>
             <p className="text-gray-600">Instagram Followers</p>
+          </div>
+          <div className="text-center flex flex-col items-center col-span-2 md:col-span-1">
+            <img
+              src="/social-media/facebook.svg"
+              alt="Facebook Icon"
+              className="h-8 m-0.5"
+            />
+            <p className="text-3xl font-bold text-gdg-blue">1K++</p>
+            <p className="text-gray-600">Facebook Followers</p>
           </div>
         </div>
       </div>
