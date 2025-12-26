@@ -64,7 +64,7 @@ export default function Hero() {
               alt="Youtube Icon"
               className="h-8 m-0.5"
             />
-            <p className="text-3xl font-bold text-gdg-red">500++</p>
+            <p className="text-3xl font-bold text-gdg-red">700++</p>
             <p className="text-gray-600">YouTube Subscribers</p>
           </div>
           <div className="text-center flex flex-col items-center">
@@ -73,7 +73,7 @@ export default function Hero() {
               alt="Linkedin Icon"
               className="h-8 m-0.5"
             />
-            <p className="text-3xl font-bold text-gdg-yellow">1K++</p>
+            <p className="text-3xl font-bold text-gdg-yellow">2K++</p>
             <p className="text-gray-600">LinkedIn Followers</p>
           </div>
           <div className="text-center flex flex-col items-center">
@@ -82,7 +82,7 @@ export default function Hero() {
               alt="Instagram Icon"
               className="h-8 m-0.5"
             />
-            <p className="text-3xl font-bold text-gdg-green">9K++</p>
+            <p className="text-3xl font-bold text-gdg-green">10K++</p>
             <p className="text-gray-600">Instagram Followers</p>
           </div>
           <div className="text-center flex flex-col items-center col-span-2 md:col-span-1">
