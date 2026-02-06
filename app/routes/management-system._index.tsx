@@ -309,20 +309,6 @@ export default function HomeMS() {
     <LayoutMS user={user}>
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Quick Actions */}
-        <Card className="mb-8">
-          <CardContent className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild className="bg-blue-600 hover:bg-blue-700">
-                <Link to="/management-system/check-in">
-                  <QrCode className="w-4 h-4 mr-2" />
-                  Check-in Peserta
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
