@@ -240,59 +240,59 @@ export default function HomeMS() {
           errorCorrectionLevel: 'M'
         }
       );
-      
+
       // Create high-resolution canvas to add logo
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const qrImage = new Image();
       const logoImage = new Image();
-      
+
       // Enable high-quality rendering
       if (ctx) {
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
       }
-      
+
       await new Promise<void>((resolve, reject) => {
         qrImage.onload = () => {
           // Set high-resolution canvas size
           const scale = window.devicePixelRatio || 1;
           canvas.width = qrImage.width * scale;
           canvas.height = qrImage.height * scale;
-          
+
           // Scale the context for high DPI displays
           if (ctx) {
             ctx.scale(scale, scale);
             ctx.drawImage(qrImage, 0, 0, qrImage.width, qrImage.height);
           }
-          
+
           logoImage.onload = () => {
             const logoSize = qrImage.width * 0.2; // Logo size is 20% of QR code
             const logoX = (qrImage.width - logoSize) / 2;
             const logoY = (qrImage.height - logoSize) / 2;
-            
+
             if (ctx) {
               const padding = 4;
               ctx.fillStyle = '#FFFFFF';
               ctx.fillRect(logoX - padding, logoY - padding, logoSize + (padding * 2), logoSize + (padding * 2));
-              
+
               ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
             }
-            
+
             resolve();
           };
-          
+
           logoImage.onerror = () => {
             resolve();
           };
-          
+
           logoImage.src = '/logo.svg';
         };
-        
+
         qrImage.onerror = () => reject(new Error('Failed to load QR code'));
         qrImage.src = qrCodeUrl;
       });
-      
+
       const finalQrCodeUrl = canvas.toDataURL('image/png', 1.0); // Maximum quality PNG
       setQrCodeUrl(finalQrCodeUrl);
       setSelectedUrlForQR(url);
@@ -309,6 +309,21 @@ export default function HomeMS() {
     <LayoutMS user={user}>
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Quick Actions */}
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
+            <div className="flex flex-wrap gap-4">
+              <Button asChild className="bg-blue-600 hover:bg-blue-700">
+                <Link to="/management-system/check-in">
+                  <QrCode className="w-4 h-4 mr-2" />
+                  Check-in Peserta
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
