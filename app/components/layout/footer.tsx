@@ -86,14 +86,6 @@ export default function Footer() {
                   Brand Guidelines
                 </Link>
               </div>
-              <div>
-                <Link
-                  to="/payment-policy"
-                  className="text-gray-300 hover:text-white transition-colors text-sm block mx-auto md:mx-0 md:ml-auto"
-                >
-                  Payment Policy
-                </Link>
-              </div>
             </div>
             <p className="font-semibold text-white mb-4">Join Our Community</p>
             <Button
